@@ -1,3 +1,5 @@
+import { AiFillAppstore } from "react-icons/ai";
+import { CgTrello } from "react-icons/cg";
 import { TbBrandZulip } from "react-icons/tb";
 import { DiJsBadge } from "react-icons/di";
 import { CiSettings } from "react-icons/ci";
@@ -35,10 +37,26 @@ export function Sidebar() {
         </li>
         <li>
           <NavLink
-            to="/zustandpage"
+            to="/zustandpage/todo"
             className={({ isActive }) => (isActive ? " text-[#056d0b]" : "")}
           >
             <TbBrandZulip className="text-3xl" />
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/zustandpage/board"
+            className={({ isActive }) => (isActive ? " text-[#056d0b]" : "")}
+          >
+            <CgTrello className="text-3xl" />
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/zustandpage/application"
+            className={({ isActive }) => (isActive ? " text-[#056d0b]" : "")}
+          >
+            <AiFillAppstore className="text-3xl" />
           </NavLink>
         </li>
       </ul>

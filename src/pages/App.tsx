@@ -3,7 +3,9 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./Home/Home";
 import { Layout } from "../layout/Layout";
 import { JsPage } from "./JsPage/JsPage";
-import { ZustandPage } from "./ZustandPage/ZustandPage";
+import { TodoPage } from "./ZustandPage/Todo/TodoPage";
+import { BoardPage } from "./ZustandPage/Board/BoardPage";
+import { Application } from "./ZustandPage/Application/Application";
 
 export default function App() {
   return (
@@ -11,7 +13,9 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/jspage" element={<JsPage />} />
-        <Route path="/zustandpage" element={<ZustandPage />} />
+        <Route path="/zustandpage/todo" element={<TodoPage />} />
+        <Route path="/zustandpage/board" element={<BoardPage />} />
+        <Route path="/zustandpage/application" element={<Application />} />
       </Routes>
     </Layout>
   );

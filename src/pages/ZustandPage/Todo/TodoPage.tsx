@@ -9,9 +9,9 @@ import {
 import { TbBlur } from "react-icons/tb";
 import { Button } from "@/shared/ui/Button";
 import { Input } from "@/shared/ui/input";
-import { useTodoStore } from "@/store/useStoreZustand";
+import { useTodoStore } from "@/store/useStoreTodo";
 
-export function ZustandPage() {
+export function TodoPage() {
   const {
     todos,
     filter,
