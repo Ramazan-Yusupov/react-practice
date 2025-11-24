@@ -6,6 +6,7 @@ import { JsPage } from "./JsPage/JsPage";
 import { TodoPage } from "./ZustandPage/Todo/TodoPage";
 import { BoardPage } from "./ZustandPage/Board/BoardPage";
 import { Application } from "./ZustandPage/Application/Application";
+import { HooksPage } from "./HooksPage/HooksPage";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/zustandpage/todo" element={<TodoPage />} />
         <Route path="/zustandpage/board" element={<BoardPage />} />
         <Route path="/zustandpage/application" element={<Application />} />
+        <Route path="/hookspage" element={<HooksPage />} />
       </Routes>
     </Layout>
   );

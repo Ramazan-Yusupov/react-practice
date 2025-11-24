@@ -1,3 +1,4 @@
+import { GiHook } from "react-icons/gi";
 import { AiFillAppstore } from "react-icons/ai";
 import { CgTrello } from "react-icons/cg";
 import { TbBrandZulip } from "react-icons/tb";
@@ -57,6 +58,14 @@ export function Sidebar() {
             className={({ isActive }) => (isActive ? " text-[#056d0b]" : "")}
           >
             <AiFillAppstore className="text-3xl" />
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/hookspage"
+            className={({ isActive }) => (isActive ? " text-[#1449bc]" : "")}
+          >
+            <GiHook className="text-3xl" />
           </NavLink>
         </li>
       </ul>
