@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./Home/Home";
-import { Layout } from "../layout/Layout";
+import { Layout } from "@/layout/Layout";
 import { JsPage } from "./JsPage/JsPage";
 import { TodoPage } from "./ZustandPage/Todo/TodoPage";
 import { BoardPage } from "./ZustandPage/Board/BoardPage";
