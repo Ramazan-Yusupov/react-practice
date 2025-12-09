@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 
 export function Sidebar() {
   return (
-    <aside className="fixed top-0 left-0 h-screen border-r-2 p-5 flex flex-col items-center justify-between gap-10 z-10">
+    <aside className="fixed top-0 left-0 h-screen p-5 flex flex-col items-center justify-between gap-10 z-10">
       <ul className="flex flex-col items-center gap-6 w-full">
         <li>
           <NavLink to="/">
