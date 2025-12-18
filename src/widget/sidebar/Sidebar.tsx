@@ -6,19 +6,22 @@ import { DiJsBadge } from "react-icons/di";
 import { CiSettings } from "react-icons/ci";
 import { AiFillHome } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
+import { ModalAuth } from "@/features/ModalAuth/ModalAuth";
+import { useState } from "react";
 
 export function Sidebar() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <aside className="fixed top-0 left-0 h-screen p-5 flex flex-col items-center justify-between gap-10 z-10">
       <ul className="flex flex-col items-center gap-6 w-full">
         <li>
-          <NavLink to="/">
+          <button onClick={() => setIsOpen(true)}>
             <img
               src="/frontend.jpg"
               alt="Avatar"
               className="w-12 h-12 rounded-full border-2 cursor-pointer"
             />
-          </NavLink>
+          </button>
         </li>
         <li>
           <NavLink
@@ -75,6 +78,8 @@ export function Sidebar() {
       >
         <CiSettings className="text-3xl" />
       </NavLink>
+
+      {isOpen && <ModalAuth isOpen={isOpen} setIsOpen={setIsOpen} />}
     </aside>
   );
 }
