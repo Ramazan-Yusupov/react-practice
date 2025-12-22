@@ -1,15 +1,13 @@
 interface CardProps {
-  title: React.ReactNode;
   className?: string;
   children: React.ReactNode;
 }
 
-export function CardBlock({ title, className, children }: CardProps) {
+export function CardBlock({ className, children }: CardProps) {
   return (
     <div
-      className={`${className} flex flex-col gap-5 border-2 p-4 rounded-2xl w-70`}
+      className={`${className} flex items-center gap-5 border-2 p-4 rounded-2xl`}
     >
-      <div className="text-xl">{title}</div>
       {children}
     </div>
   );
