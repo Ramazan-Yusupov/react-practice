@@ -1,37 +1,13 @@
+import { useJsHook } from "@/hooks/useJsHook";
 import { Card } from "./Card";
 
-const developers = [
-  {
-    id: 1,
-    user: "Frontend",
-    language: "JavaScript",
-  },
-  {
-    id: 2,
-    user: "Backend",
-    language: "Nest.js",
-  },
-  {
-    id: 3,
-    user: "FullStack",
-    language: "Nest.js, JavaScript",
-  },
-];
-
 export function JsComponent() {
+  const { user, checkAge, message } = useJsHook();
   return (
-    <Card className="w-150">
-      <div className="flex flex-col gap-5">
-        {developers.map((dev) => (
-          <div
-            key={dev.id}
-            className="flex justify-between w-full border-b border-gray-600 last:border-none pb-5 last:pb-0"
-          >
-            <div>{dev.user}</div>
-            <div>{dev.language}</div>
-          </div>
-        ))}
-      </div>
+    <Card className="max-w-150 *:border-b-2 *:pb-5">
+      <div>{user("Frontend", 23)}</div>
+      <div>{message()}</div>
+      <div>{checkAge(23)}</div>
     </Card>
   );
 }
