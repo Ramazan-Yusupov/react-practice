@@ -1,6 +1,6 @@
 interface CodeProps {
   code: string;
-  color?: "green" | "red" | "yellow";
+  color?: "white" | "green" | "red" | "yellow";
   colorTitle?: "white" | "green" | "red" | "yellow";
   onClick?: () => void;
   children: React.ReactNode;
@@ -15,6 +15,7 @@ export function CodeBlock({
 }: CodeProps) {
   const colors = {
     red: "text-red-300",
+    white: "text-white",
     green: "text-green-300",
     yellow: "text-yellow-300",
   };

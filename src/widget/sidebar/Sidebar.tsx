@@ -1,5 +1,5 @@
 import { CiSettings } from "react-icons/ci";
-import { AiFillHome } from "react-icons/ai";
+import { AiFillAlert, AiFillHome } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import { ModalAuth } from "@/features/ModalAuth/ModalAuth";
 import { useState } from "react";
@@ -24,6 +24,14 @@ export function Sidebar() {
             className={({ isActive }) => (isActive ? " text-red-600" : "")}
           >
             <AiFillHome className="text-3xl" />
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/ReactComponents"
+            className={({ isActive }) => (isActive ? " text-red-600" : "")}
+          >
+            <AiFillAlert className="text-3xl" />
           </NavLink>
         </li>
       </ul>
