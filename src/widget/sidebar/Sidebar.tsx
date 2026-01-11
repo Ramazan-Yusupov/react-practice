@@ -3,20 +3,26 @@ import { AiFillAlert, AiFillHome } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import { ModalAuth } from "@/features/ModalAuth/ModalAuth";
 import { useState } from "react";
+import { Avatar } from "@/shared/ui/Avatar";
+import { useAuth } from "@/contexts/AuthContext";
 
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, isAuthenticated } = useAuth();
+
   return (
     <aside className="fixed top-0 left-0 h-screen p-5 flex flex-col items-center justify-between gap-10 z-10">
       <ul className="flex flex-col items-center gap-6 w-full">
         <li>
-          <button onClick={() => setIsOpen(true)}>
-            <img
-              src="/frontend.jpg"
-              alt="Avatar"
-              className="w-12 h-12 rounded-full border-2 cursor-pointer"
+          {isAuthenticated && user ? (
+            <Avatar
+              img={user.avatar}
+              avatarSeed={user.avatarSeed}
+              onClick={() => setIsOpen(true)}
             />
-          </button>
+          ) : (
+            <Avatar isAnonymous onClick={() => setIsOpen(true)} />
+          )}
         </li>
         <li>
           <NavLink

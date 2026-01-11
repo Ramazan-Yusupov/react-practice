@@ -56,15 +56,60 @@ export function useJsHook() {
     return b;
   };
 
+  const anotherFn = () => {
+    return "Another Function";
+  };
+
+  const buttonInfo = {
+    width: 200,
+    text: "Buy",
+  };
+
+  const redButton = {
+    color: "red",
+  };
+
+  const button = {
+    ...buttonInfo,
+    ...redButton,
+  };
+
+  const multiFn = (value: number, multi = 2): number => {
+    return value * multi;
+  };
+
+  const isError = true;
+
+  const fnWithError = () => {
+    if (isError) {
+      return "True";
+    } else {
+      throw new Error("Some Error");
+    }
+  };
+
+  try {
+    fnWithError();
+  } catch (error) {
+    console.error(error);
+  }
+
+  const isFn = false;
+
   return {
     myFn,
     user,
+    isFn,
     count,
+    button,
     result,
+    multiFn,
     message,
     setCount,
     checkAge,
+    anotherFn,
     myFunction,
+    fnWithError,
     fnWithCallback,
   };
 }
