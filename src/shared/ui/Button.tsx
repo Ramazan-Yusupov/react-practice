@@ -1,21 +1,25 @@
 interface ButtonProps {
-  children: React.ReactNode;
-  variant?: "primary" | "secondary" | "danger";
-  size?: "sm" | "md" | "lg";
+  title?: string;
+  maxWidth?: string;
   disabled?: boolean;
-  onClick?: () => void;
-  type?: "button" | "submit" | "reset";
   className?: string;
+  onClick?: () => void;
+  children?: React.ReactNode;
+  size?: "sm" | "md" | "lg";
+  type?: "button" | "submit" | "reset";
+  variant?: "primary" | "secondary" | "danger";
 }
 
 export function Button({
-  children,
-  variant = "primary",
-  size = "md",
-  disabled = false,
+  title,
   onClick,
-  type = "button",
+  maxWidth,
+  children,
+  size = "md",
   className = "",
+  type = "button",
+  disabled = false,
+  variant = "primary",
 }: ButtonProps) {
   const baseStyles = "font-semibold rounded-lg transition-colors";
 
@@ -39,7 +43,11 @@ export function Button({
       disabled={disabled}
       onClick={onClick}
       className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${disabledStyles} ${className}`}
+      style={{
+        maxWidth: maxWidth,
+      }}
     >
+      {title}
       {children}
     </button>
   );

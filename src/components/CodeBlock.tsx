@@ -27,7 +27,7 @@ export function CodeBlock({
     yellow: "text-yellow-300",
   };
   return (
-    <div className="flex-between">
+    <div className="flex-between gap-10">
       <div onClick={onClick} className={`${colorsTitle[colorTitle]}`}>
         {children}
       </div>

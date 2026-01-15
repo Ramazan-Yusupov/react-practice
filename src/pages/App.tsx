@@ -5,6 +5,7 @@ import { Layout } from "@/layout/Layout";
 import { ReactComponents } from "./ReactComponents/Page";
 import { Settings } from "./Settings/Settings";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { FuncArray } from "@/components/FuncArray";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/ReactComponents" element={<ReactComponents />} />
+          <Route path="/FuncArray" element={<FuncArray />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>
       </Layout>
