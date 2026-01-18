@@ -58,10 +58,15 @@ export default function Home() {
     <div className="mx-30 max-w-100 ">
       <div className="text-xl font-bold mb-4">Posts</div>
       <div className="relative flex items-center justify-between gap-8">
-        <Button onClick={() => handleLeftButtonClick()}>Left Button</Button>
-        <Button onClick={() => handleRightButtonClick()}>Right Button</Button>
+        <Button onClick={() => handleLeftButtonClick()}>Left</Button>
+        <Button onClick={() => handleRightButtonClick()}>Right</Button>
       </div>
-      <div className="mt-8 space-y-4">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="mt-8 space-y-4"
+      >
         {currentIndex < posts.length && posts[currentIndex] ? (
           <div
             key={posts[currentIndex].id}
@@ -98,9 +103,11 @@ export default function Home() {
             </div>
           </div>
         ) : (
-          <p>Loading...</p>
+          <div className="flex justify-center items-center h-40">
+            <p>Loading...</p>
+          </div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 }

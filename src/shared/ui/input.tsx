@@ -1,30 +1,38 @@
+import React from "react";
+
 interface InputProps {
-  type?: string;
-  placeholder?: string;
-  className?: string;
-  value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
+  type?: string;
+  className?: string;
+  placeholder?: string;
+  value?: number | string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export function Input({
-  type,
-  placeholder,
-  className,
+  type = "text",
+  name,
   value,
   onChange,
-  name,
+  className,
+  placeholder,
 }: InputProps) {
+  const classTypeInput =
+    "px-4 py-2 border border-gray-300 rounded-lg placeholder:text-gray-400";
+  const classTypeRange = "w-full cursor-pointer";
+
   return (
-    <input
-      type={type}
-      placeholder={placeholder}
-      className={`w-full px-4 py-2 border border-gray-300 rounded-lg placeholder:text-gray-400 ${
-        className || ""
-      }`}
-      value={value}
-      onChange={onChange}
-      name={name}
-    />
+    <>
+      <input
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className={`w-full ${
+          type === "range" ? classTypeRange : classTypeInput
+        } ${className || ""}`}
+      />
+    </>
   );
 }
