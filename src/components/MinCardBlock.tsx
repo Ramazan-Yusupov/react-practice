@@ -1,23 +1,22 @@
 import { CiEdit } from "react-icons/ci";
 import { FaRegTrashCan } from "react-icons/fa6";
-import { motion } from "framer-motion";
 
 interface MinCardBlockProps {
   onEdit?: () => void;
   onDelete?: () => void;
   children?: React.ReactNode;
+  className?: string;
 }
 
 export function MinCardBlock({
-  children,
-  onDelete,
   onEdit,
+  onDelete,
+  children,
+  className,
 }: MinCardBlockProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -200 }}
-      animate={{ opacity: 1, x: 0 }}
-      className="border-2 p-2 rounded-lg mb-2 flex-between w-full"
+    <div
+      className={`border-2 p-2 rounded-lg gap-10 mb-2 flex-between w-full ${className || ""}`}
     >
       <div>{children}</div>
       <div className="flex gap-3">
@@ -32,6 +31,6 @@ export function MinCardBlock({
           </button>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }
