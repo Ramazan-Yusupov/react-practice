@@ -28,13 +28,20 @@ export function CodeBlock({
     green: "text-green-300",
     yellow: "text-yellow-300",
   };
-  return (
+
+  return onClick ? (
+    <button
+      onClick={onClick}
+      className={`flex-between gap-10 ${isBordered ? "border-2 rounded-2xl p-3" : ""}`}
+    >
+      <div className={`${colorsTitle[colorTitle]}`}>{codeTitle}</div>
+      <code className={`${colors[color]}`}>{code}</code>
+    </button>
+  ) : (
     <div
       className={`flex-between gap-10 ${isBordered ? "border-2 rounded-2xl p-3" : ""}`}
     >
-      <div onClick={onClick} className={`${colorsTitle[colorTitle]}`}>
-        {codeTitle}
-      </div>
+      <div className={`${colorsTitle[colorTitle]}`}>{codeTitle}</div>
       <code className={`${colors[color]}`}>{code}</code>
     </div>
   );

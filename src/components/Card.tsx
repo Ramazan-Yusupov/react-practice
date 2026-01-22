@@ -1,11 +1,24 @@
+import { StatusOnOffline } from "./StatusOnOffline";
+
 interface CardProps {
   title?: string;
+  avatar?: boolean;
   maxWidth?: string;
+  isOnline?: boolean;
   className?: string;
+  isErrorOnOff?: boolean;
   children: React.ReactNode;
 }
 
-export function Card({ children, className, title, maxWidth }: CardProps) {
+export function Card({
+  title,
+  avatar,
+  children,
+  maxWidth,
+  isOnline,
+  className,
+  isErrorOnOff,
+}: CardProps) {
   const maxWidthClass: { [key: string]: string } = {
     sm: "max-w-sm",
     md: "max-w-md",
@@ -22,6 +35,18 @@ export function Card({ children, className, title, maxWidth }: CardProps) {
           className || ""
         } `}
       >
+        <header className="flex justify-between items-center w-full">
+          <div className="w-full">
+            {avatar && (
+              <img
+                src="/frontend.jpg"
+                className="w-10 h-10 rounded-full border-2 border-gray-300"
+              />
+            )}
+          </div>
+          {isErrorOnOff && <StatusOnOffline isOnline={isOnline} text />}
+        </header>
+
         {children}
       </div>
     </div>
