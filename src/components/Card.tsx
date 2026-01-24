@@ -4,7 +4,7 @@ interface CardProps {
   title?: string;
   avatar?: boolean;
   maxWidth?: string;
-  maxHeight?: string;
+  maxHeight?: number;
   isOnline?: boolean;
   className?: string;
   isErrorOnOff?: boolean;
@@ -28,13 +28,6 @@ export function Card({
     xl: "max-w-xl",
     "2xl": "max-w-2xl",
   };
-  const maxHeightClass: { [key: string]: string } = {
-    sm: "max-h-40",
-    md: "max-h-60",
-    lg: "max-h-80",
-    xl: "max-h-100",
-    "2xl": "max-h-120",
-  };
 
   return (
     <div
@@ -46,7 +39,10 @@ export function Card({
       <div
         className={`border-2 rounded-2xl p-5 flex flex-col gap-4 ${
           className || ""
-        } ${maxHeight ? `${maxHeightClass[maxHeight]}` : ""} `}
+        }  `}
+        style={{
+          maxHeight: maxHeight,
+        }}
       >
         <header className="flex justify-between items-center w-full">
           <div className="w-full">

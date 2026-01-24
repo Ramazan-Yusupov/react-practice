@@ -146,7 +146,7 @@ export function TypeScriptPage() {
         isOnline
         isErrorOnOff
         maxWidth="xl"
-        maxHeight="2xl"
+        maxHeight={380}
         title="TypeScript Example"
       >
         {userRecord && (
