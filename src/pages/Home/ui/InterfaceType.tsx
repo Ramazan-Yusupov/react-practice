@@ -11,6 +11,10 @@ type Props = {
     street: string;
     city: string;
   };
+  addressArray?: {
+    street: string;
+    city: string;
+  }[];
 };
 
 const itemsAddressPick: Pick<Props, "address">[] = [
@@ -31,6 +35,28 @@ const itemsAddressPick: Pick<Props, "address">[] = [
       street: " 789 Pine Rd",
       city: "Chicago",
     },
+  },
+];
+const itemsAddressArray: Pick<Props, "addressArray">[] = [
+  {
+    addressArray: [
+      {
+        street: "123 Main St",
+        city: "New York",
+      },
+      {
+        street: "456 Oak Ave",
+        city: "Los Angeles",
+      },
+    ],
+  },
+  {
+    addressArray: [
+      {
+        street: "789 Pine Rd",
+        city: "Chicago",
+      },
+    ],
   },
 ];
 
@@ -64,8 +90,15 @@ export function InterfaceType({
       <CodeBlock isBordered codeTitle="Status" code={status} />
       <CodeBlock
         isBordered
-        codeTitle="Address"
+        codeTitle="AddressObj"
         code={itemsAddressPick.map((item) => item.address?.street)}
+      />
+      <CodeBlock
+        isBordered
+        codeTitle="AddressArr"
+        code={itemsAddressArray.map((item) =>
+          item.addressArray?.map((addr) => addr.street),
+        )}
       />
     </div>
   );
