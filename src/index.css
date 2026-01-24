@@ -11,6 +11,9 @@ button {
   display: none;
 }
 
+.space-border {
+  @apply space-y-4 border-b-4 border-gray-600 pb-4;
+}
 .flex-between {
   @apply flex justify-between w-full items-center;
 }

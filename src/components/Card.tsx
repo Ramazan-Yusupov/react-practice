@@ -4,6 +4,7 @@ interface CardProps {
   title?: string;
   avatar?: boolean;
   maxWidth?: string;
+  maxHeight?: string;
   isOnline?: boolean;
   className?: string;
   isErrorOnOff?: boolean;
@@ -16,6 +17,7 @@ export function Card({
   children,
   maxWidth,
   isOnline,
+  maxHeight,
   className,
   isErrorOnOff,
 }: CardProps) {
@@ -26,14 +28,25 @@ export function Card({
     xl: "max-w-xl",
     "2xl": "max-w-2xl",
   };
+  const maxHeightClass: { [key: string]: string } = {
+    sm: "max-h-40",
+    md: "max-h-60",
+    lg: "max-h-80",
+    xl: "max-h-100",
+    "2xl": "max-h-120",
+  };
 
   return (
-    <div className={maxWidth ? `${maxWidthClass[maxWidth]}` : ""}>
+    <div
+      className={`
+      ${maxWidth ? `${maxWidthClass[maxWidth]}` : ""}
+      `}
+    >
       <h2 className="text-2xl font-bold mb-4">{title}</h2>
       <div
-        className={`border-2 rounded-2xl p-5 flex flex-col gap-4 overflow-hidden overflow-y-auto scrollHidden ${
+        className={`border-2 rounded-2xl p-5 flex flex-col gap-4 ${
           className || ""
-        } `}
+        } ${maxHeight ? `${maxHeightClass[maxHeight]}` : ""} `}
       >
         <header className="flex justify-between items-center w-full">
           <div className="w-full">
@@ -44,10 +57,11 @@ export function Card({
               />
             )}
           </div>
-          {isErrorOnOff && <StatusOnOffline isOnline={isOnline} text />}
+          {isOnline && <StatusOnOffline isOnline={isErrorOnOff} />}
         </header>
-
-        {children}
+        <div className="flex flex-col gap-4 overflow-hidden overflow-y-auto scrollHidden">
+          {children}
+        </div>
       </div>
     </div>
   );
