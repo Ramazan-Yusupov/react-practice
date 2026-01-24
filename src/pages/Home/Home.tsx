@@ -19,7 +19,7 @@ export default function Home() {
           count={0}
           status="online"
           message="Submited"
-          names={["Frontend, Backend"]}
+          names={["Frontend, Backend, Fullstack"]}
         />
       </Card>
     </div>
