@@ -5,6 +5,7 @@ import { ModalAuth } from "@/features/ModalAuth/ModalAuth";
 import { useState } from "react";
 import { Avatar } from "@/shared/ui/Avatar";
 import { useAuth } from "@/contexts/AuthContext";
+import { RiAdminFill } from "react-icons/ri";
 
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,12 +42,23 @@ export function Sidebar() {
           </NavLink>
         </li>
       </ul>
-      <NavLink
-        to="/settings"
-        className={({ isActive }) => (isActive ? " text-red-600" : "")}
-      >
-        <CiSettings className="text-3xl" />
-      </NavLink>
+      <div className="flex flex-col gap-4">
+        {user?.role === "admin" && (
+          <NavLink
+            to="/admin"
+            className={({ isActive }) => (isActive ? " text-red-600" : "")}
+          >
+            <RiAdminFill className="text-3xl" />
+          </NavLink>
+        )}
+
+        <NavLink
+          to="/settings"
+          className={({ isActive }) => (isActive ? " text-red-600" : "")}
+        >
+          <CiSettings className="text-3xl" />
+        </NavLink>
+      </div>
 
       {isOpen && <ModalAuth isOpen={isOpen} setIsOpen={setIsOpen} />}
     </aside>

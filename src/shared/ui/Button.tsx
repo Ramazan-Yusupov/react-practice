@@ -11,7 +11,7 @@ interface ButtonProps {
 }
 
 export function Button({
-  title = "Button",
+  title,
   onClick,
   maxWidth,
   children,

@@ -3,6 +3,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Input } from "@/shared/ui/Input";
 import { Avatar } from "@/shared/ui/Avatar";
 import { Button } from "@/shared/ui/Button";
+import { ModalAdminRequest } from "@/features/ModalAdminRequest/ModalAdminRequest";
 
 export function Settings() {
   const { user, updateUser, logout, isAuthenticated } = useAuth();
@@ -11,6 +12,7 @@ export function Settings() {
     name: user?.name || "",
     email: user?.email || "",
   });
+  const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   if (!isAuthenticated || !user) {
@@ -154,6 +156,30 @@ export function Settings() {
         </div>
       </section>
 
+      {/* Стать админом */}
+      {user.role !== "admin" && (
+        <section className="mb-8">
+          <div className=" border border-gray-200  rounded-lg p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-medium  ">
+                  Запрос на статус администратора
+                </h3>
+                <p className="text-sm  ">
+                  Отправьте запрос, чтобы получить права администратора
+                </p>
+              </div>
+              <Button
+                onClick={() => setIsAdminModalOpen(true)}
+                variant="primary"
+              >
+                Отправить запрос
+              </Button>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Выход */}
       <section>
         <div className=" border border-gray-200  rounded-lg p-6">
@@ -168,6 +194,12 @@ export function Settings() {
           </div>
         </div>
       </section>
+      {isAdminModalOpen && (
+        <ModalAdminRequest
+          isOpen={isAdminModalOpen}
+          setIsOpen={setIsAdminModalOpen}
+        />
+      )}
     </div>
   );
 }

@@ -16,13 +16,14 @@ export function ModalAuth({ isOpen, setIsOpen }: ModalProps) {
   // Форма регистрации
   const [registerData, setRegisterData] = useState({
     name: "",
+    username: "",
     email: "",
     password: "",
   });
 
   // Форма входа
   const [loginData, setLoginData] = useState({
-    email: "",
+    identifier: "",
     password: "",
   });
 
@@ -31,7 +32,12 @@ export function ModalAuth({ isOpen, setIsOpen }: ModalProps) {
     setError("");
     setLoading(true);
 
-    if (!registerData.name || !registerData.email || !registerData.password) {
+    if (
+      !registerData.name ||
+      !registerData.username ||
+      !registerData.email ||
+      !registerData.password
+    ) {
       setError("Все поля обязательны");
       setLoading(false);
       return;
@@ -39,15 +45,16 @@ export function ModalAuth({ isOpen, setIsOpen }: ModalProps) {
 
     const success = await register(
       registerData.name,
+      registerData.username,
       registerData.email,
-      registerData.password
+      registerData.password,
     );
 
     if (success) {
       setIsOpen(false);
-      setRegisterData({ name: "", email: "", password: "" });
+      setRegisterData({ name: "", username: "", email: "", password: "" });
     } else {
-      setError("Пользователь с таким email уже существует");
+      setError("Пользователь с таким email или ником уже существует");
     }
 
     setLoading(false);
@@ -58,19 +65,19 @@ export function ModalAuth({ isOpen, setIsOpen }: ModalProps) {
     setError("");
     setLoading(true);
 
-    if (!loginData.email || !loginData.password) {
+    if (!loginData.identifier || !loginData.password) {
       setError("Все поля обязательны");
       setLoading(false);
       return;
     }
 
-    const success = await login(loginData.email, loginData.password);
+    const success = await login(loginData.identifier, loginData.password);
 
     if (success) {
       setIsOpen(false);
-      setLoginData({ email: "", password: "" });
+      setLoginData({ identifier: "", password: "" });
     } else {
-      setError("Неверный email или пароль");
+      setError("Неверный email/ник или пароль");
     }
 
     setLoading(false);
@@ -79,8 +86,8 @@ export function ModalAuth({ isOpen, setIsOpen }: ModalProps) {
   const handleClose = () => {
     setIsOpen(false);
     setError("");
-    setRegisterData({ name: "", email: "", password: "" });
-    setLoginData({ email: "", password: "" });
+    setRegisterData({ name: "", username: "", email: "", password: "" });
+    setLoginData({ identifier: "", password: "" });
   };
 
   return (
@@ -119,6 +126,17 @@ export function ModalAuth({ isOpen, setIsOpen }: ModalProps) {
                         setRegisterData({
                           ...registerData,
                           name: e.target.value,
+                        })
+                      }
+                    />
+                    <Input
+                      type="text"
+                      placeholder="Username"
+                      value={registerData.username}
+                      onChange={(e) =>
+                        setRegisterData({
+                          ...registerData,
+                          username: e.target.value,
                         })
                       }
                     />
@@ -176,11 +194,14 @@ export function ModalAuth({ isOpen, setIsOpen }: ModalProps) {
                   )}
                   <div className="flex flex-col gap-3 mb-3">
                     <Input
-                      type="email"
-                      placeholder="Email"
-                      value={loginData.email}
+                      type="text"
+                      placeholder="Email or Username"
+                      value={loginData.identifier}
                       onChange={(e) =>
-                        setLoginData({ ...loginData, email: e.target.value })
+                        setLoginData({
+                          ...loginData,
+                          identifier: e.target.value,
+                        })
                       }
                     />
                     <Input

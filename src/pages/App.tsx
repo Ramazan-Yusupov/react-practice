@@ -5,6 +5,7 @@ import { Layout } from "@/layout/Layout";
 import { Settings } from "./Settings/Settings";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { TypeScriptPage } from "./TypeScriptPage/TypeScriptPage";
+import { AdminPage } from "./Admin/AdminPage";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/typescript" element={<TypeScriptPage />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </Layout>
     </AuthProvider>
