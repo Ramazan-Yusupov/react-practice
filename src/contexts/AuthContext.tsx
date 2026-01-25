@@ -5,6 +5,25 @@ import {
   useEffect,
   type ReactNode,
 } from "react";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+} from "firebase/auth";
+import {
+  collection,
+  doc,
+  setDoc,
+  getDoc,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  query,
+  where,
+} from "firebase/firestore";
+import { auth, db } from "../firebase";
 
 export interface User {
   id: string;
@@ -12,7 +31,7 @@ export interface User {
   username: string;
   email: string;
   avatar?: string;
-  avatarSeed?: string; // Для генерации рандомной аватарки
+  avatarSeed?: string;
   theme?: "light" | "dark";
   role: "admin" | "user";
 }
@@ -29,6 +48,7 @@ export interface AdminRequest {
 
 interface AuthContextType {
   user: User | null;
+  loading: boolean;
   login: (identifier: string, password: string) => Promise<boolean>;
   register: (
     name: string,
@@ -37,7 +57,7 @@ interface AuthContextType {
     password: string,
   ) => Promise<boolean>;
   logout: () => void;
-  updateUser: (updates: Partial<User>) => void;
+  updateUser: (updates: Partial<User>) => Promise<void>;
   isAuthenticated: boolean;
   adminRequests: AdminRequest[];
   submitAdminRequest: (message: string) => Promise<boolean>;
@@ -50,136 +70,100 @@ interface AuthContextType {
     role: "admin" | "user",
     requestId?: string,
   ) => Promise<void>;
+  getAllUsers: () => Promise<Array<User>>;
+  deleteAdminRequest: (requestId: string) => Promise<void>;
+  deleteUser: (userId: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const STORAGE_KEY = "auth_user";
-const USERS_KEY = "auth_users"; // Для хранения всех пользователей
-const ADMIN_REQUESTS_KEY = "admin_requests";
-
-const INITIAL_ADMIN = {
-  id: "admin-id",
-  name: "Admin",
-  username: "admin",
-  email: "frontenddev747@gmail.com",
-  password: "20021911Ram", // Временно такой же пароль для входа
-  role: "admin" as const,
-};
-
-// Генерация рандомной аватарки (как в GitHub)
+// Генерация рандомной аватарки
 function generateAvatarSeed(email: string): string {
   return email.split("@")[0] + Math.random().toString(36).substring(7);
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(() => {
-    if (typeof window === "undefined") return null;
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      try {
-        return JSON.parse(saved);
-      } catch {
-        return null;
-      }
-    }
-    return null;
-  });
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [adminRequests, setAdminRequests] = useState<AdminRequest[]>([]);
 
-  const [adminRequests, setAdminRequests] = useState<AdminRequest[]>(() => {
-    if (typeof window === "undefined") return [];
-    const saved = localStorage.getItem(ADMIN_REQUESTS_KEY);
-    return saved ? JSON.parse(saved) : [];
-  });
-
-  // Инициализация первого админа и обновление прав
+  // Слушатель состояния авторизации
   useEffect(() => {
-    const usersJson = localStorage.getItem(USERS_KEY);
-    const users: Array<User & { password: string }> = usersJson
-      ? JSON.parse(usersJson)
-      : [];
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      if (firebaseUser) {
+        // Получаем данные пользователя из Firestore
+        const userDocRef = doc(db, "users", firebaseUser.uid);
+        const userDoc = await getDoc(userDocRef);
 
-    const existingUserIndex = users.findIndex(
-      (u) => u.email === INITIAL_ADMIN.email,
-    );
+        if (userDoc.exists()) {
+          const userData = userDoc.data() as User;
 
-    if (existingUserIndex === -1) {
-      users.push(INITIAL_ADMIN);
-      localStorage.setItem(USERS_KEY, JSON.stringify(users));
+          // Auto-promote Super Admin if needed
+          if (
+            firebaseUser.email === "frontenddev747@gmail.com" &&
+            userData.role !== "admin"
+          ) {
+            await updateDoc(userDocRef, { role: "admin" });
+            userData.role = "admin";
+          }
+
+          setUser(userData);
+        } else {
+          // Если документа нет (странная ситуация), создаем базовый
+          console.error("User document not found for", firebaseUser.uid);
+        }
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // Загрузка заявок на админа (только если админ)
+  useEffect(() => {
+    if (user?.role === "admin") {
+      const fetchRequests = async () => {
+        const q = query(collection(db, "admin_requests"));
+        const querySnapshot = await getDocs(q);
+        const requests: AdminRequest[] = [];
+        querySnapshot.forEach((doc) => {
+          requests.push({ id: doc.id, ...doc.data() } as AdminRequest);
+        });
+        setAdminRequests(requests);
+      };
+      fetchRequests();
     } else {
-      // Принудительно обновляем данные админа, если они неверные
-      const existingUser = users[existingUserIndex];
-      if (
-        existingUser.role !== "admin" ||
-        existingUser.username !== "admin" ||
-        existingUser.password !== "20021911Ram"
-      ) {
-        users[existingUserIndex] = {
-          ...existingUser,
-          role: "admin",
-          username: "admin",
-          password: "20021911Ram",
-        };
-        localStorage.setItem(USERS_KEY, JSON.stringify(users));
-      }
-    }
-
-    // Также обновляем текущего пользователя, если он вошел под этой почтой
-    if (user && user.email === INITIAL_ADMIN.email) {
-      if (user.role !== "admin" || user.username !== "admin") {
-        setUser({ ...user, role: "admin", username: "admin" });
-      }
+      setAdminRequests([]);
     }
   }, [user]);
-
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
-    } else {
-      localStorage.removeItem(STORAGE_KEY);
-    }
-  }, [user]);
-
-  useEffect(() => {
-    localStorage.setItem(ADMIN_REQUESTS_KEY, JSON.stringify(adminRequests));
-  }, [adminRequests]);
 
   const login = async (
     identifier: string,
     password: string,
   ): Promise<boolean> => {
     try {
-      // Получаем всех пользователей из localStorage
-      const usersJson = localStorage.getItem(USERS_KEY);
-      const users: Array<User & { password: string }> = usersJson
-        ? JSON.parse(usersJson)
-        : [];
+      // Firebase Auth поддерживает вход только по email.
+      // Если identifier не email, придется сначала найти email по username в Firestore.
+      let emailToUse = identifier;
 
-      // Ищем пользователя по email или username
-      const foundUser = users.find(
-        (u) =>
-          (u.email === identifier || u.username === identifier) &&
-          u.password === password,
-      );
-
-      if (foundUser) {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { password: _, ...userWithoutPassword } = foundUser;
-        // Если нет avatarSeed, генерируем его и сохраняем
-        if (!userWithoutPassword.avatarSeed) {
-          userWithoutPassword.avatarSeed = generateAvatarSeed(foundUser.email);
-          // Обновляем в списке пользователей
-          const userIndex = users.findIndex((u) => u.id === foundUser.id);
-          if (userIndex !== -1) {
-            users[userIndex].avatarSeed = userWithoutPassword.avatarSeed;
-            localStorage.setItem(USERS_KEY, JSON.stringify(users));
-          }
+      if (!identifier.includes("@")) {
+        // Ищем по username
+        const q = query(
+          collection(db, "users"),
+          where("username", "==", identifier),
+        );
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+          emailToUse = querySnapshot.docs[0].data().email;
+        } else {
+          return false; // Пользователь не найден
         }
-        setUser(userWithoutPassword);
-        return true;
       }
 
-      return false;
+      await signInWithEmailAndPassword(auth, emailToUse, password);
+      return true;
     } catch (error) {
       console.error("Login error:", error);
       return false;
@@ -193,38 +177,36 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     password: string,
   ): Promise<boolean> => {
     try {
-      // Получаем всех пользователей
-      const usersJson = localStorage.getItem(USERS_KEY);
-      const users: Array<User & { password: string }> = usersJson
-        ? JSON.parse(usersJson)
-        : [];
-
-      // Проверяем, существует ли пользователь
-      if (
-        users.some((u) => u.email === email) ||
-        users.some((u) => u.username === username)
-      ) {
-        return false; // Пользователь уже существует
+      // Проверяем уникальность username
+      const q = query(
+        collection(db, "users"),
+        where("username", "==", username),
+      );
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        console.error("Username already taken");
+        return false;
       }
 
-      // Создаем нового пользователя
-      const avatarSeed = generateAvatarSeed(email);
-      const newUser: User & { password: string } = {
-        id: Date.now().toString(),
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      const firebaseUser = userCredential.user;
+
+      const newUser: User = {
+        id: firebaseUser.uid,
         name,
         username,
         email,
-        password,
-        avatarSeed,
+        avatarSeed: generateAvatarSeed(email),
         role: "user",
       };
 
-      users.push(newUser);
-      localStorage.setItem(USERS_KEY, JSON.stringify(users));
-
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { password: _, ...userWithoutPassword } = newUser;
-      setUser(userWithoutPassword);
+      // Сохраняем данные пользователя в Firestore
+      await setDoc(doc(db, "users", firebaseUser.uid), newUser);
+      setUser(newUser);
       return true;
     } catch (error) {
       console.error("Register error:", error);
@@ -232,27 +214,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
+    await signOut(auth);
     setUser(null);
   };
 
-  const updateUser = (updates: Partial<User>) => {
+  const updateUser = async (updates: Partial<User>) => {
     if (user) {
       try {
-        const updatedUser = { ...user, ...updates };
-        setUser(updatedUser);
-
-        // Обновляем в списке пользователей
-        const usersJson = localStorage.getItem(USERS_KEY);
-        if (usersJson) {
-          const users: Array<User & { password: string }> =
-            JSON.parse(usersJson);
-          const userIndex = users.findIndex((u) => u.id === user.id);
-          if (userIndex !== -1) {
-            users[userIndex] = { ...users[userIndex], ...updates };
-            localStorage.setItem(USERS_KEY, JSON.stringify(users));
-          }
-        }
+        const userDocRef = doc(db, "users", user.id);
+        await updateDoc(userDocRef, updates);
+        setUser({ ...user, ...updates });
       } catch (error) {
         console.error("Update user error:", error);
       }
@@ -262,48 +234,51 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const submitAdminRequest = async (message: string): Promise<boolean> => {
     if (!user) return false;
 
-    const newRequest: AdminRequest = {
-      id: Date.now().toString(),
-      userId: user.id,
-      username: user.username,
-      email: user.email,
-      message,
-      status: "pending",
-      createdAt: Date.now(),
-    };
+    try {
+      const newRequest = {
+        userId: user.id,
+        username: user.username,
+        email: user.email,
+        message,
+        status: "pending",
+        createdAt: Date.now(),
+      };
 
-    setAdminRequests((prev) => [...prev, newRequest]);
-    return true;
+      const docRef = await addDoc(collection(db, "admin_requests"), newRequest);
+      // Добавляем ID документа к локальному состоянию для немедленного отображения
+      setAdminRequests((prev) => [
+        ...prev,
+        { id: docRef.id, ...newRequest } as AdminRequest,
+      ]);
+      return true;
+    } catch (error) {
+      console.error("Submit request error:", error);
+      return false;
+    }
   };
 
   const handleAdminRequest = async (
     requestId: string,
     status: "approved" | "rejected",
   ) => {
-    setAdminRequests((prev) =>
-      prev.map((req) => (req.id === requestId ? { ...req, status } : req)),
-    );
+    try {
+      const requestRef = doc(db, "admin_requests", requestId);
+      await updateDoc(requestRef, { status });
 
-    if (status === "approved") {
-      const request = adminRequests.find((req) => req.id === requestId);
-      if (request) {
-        // Обновляем роль пользователя
-        const usersJson = localStorage.getItem(USERS_KEY);
-        if (usersJson) {
-          const users: Array<User & { password: string }> =
-            JSON.parse(usersJson);
-          const userIndex = users.findIndex((u) => u.id === request.userId);
-          if (userIndex !== -1) {
-            users[userIndex].role = "admin";
-            localStorage.setItem(USERS_KEY, JSON.stringify(users));
+      setAdminRequests((prev) =>
+        prev.map((req) => (req.id === requestId ? { ...req, status } : req)),
+      );
 
-            // Если это текущий пользователь, обновляем его
-            if (user?.id === request.userId) {
-              setUser({ ...user, role: "admin" });
-            }
-          }
+      if (status === "approved") {
+        const request = adminRequests.find((req) => req.id === requestId);
+        if (request) {
+          // Обновляем роль пользователя в Firestore
+          const userRef = doc(db, "users", request.userId);
+          await updateDoc(userRef, { role: "admin" });
         }
       }
+    } catch (error) {
+      console.error("Handle request error:", error);
     }
   };
 
@@ -312,39 +287,83 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     role: "admin" | "user",
     requestId?: string,
   ) => {
-    const usersJson = localStorage.getItem(USERS_KEY);
-    if (usersJson) {
-      const users: Array<User & { password: string }> = JSON.parse(usersJson);
-      const userIndex = users.findIndex((u) => u.id === userId);
-      if (userIndex !== -1) {
-        users[userIndex].role = role;
-        localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    try {
+      const userRef = doc(db, "users", userId);
+      await updateDoc(userRef, { role });
 
-        // Если это текущий пользователь, обновляем его сессию
-        if (user?.id === userId) {
-          setUser({ ...user, role });
-        }
+      // Обновляем статус заявки, если есть ID
+      if (requestId) {
+        const requestRef = doc(db, "admin_requests", requestId);
+        await updateDoc(requestRef, {
+          status: role === "admin" ? "approved" : "rejected",
+        });
 
-        // Обновляем статус заявки, если указан requestId
-        if (requestId) {
-          setAdminRequests((prev) =>
-            prev.map((req) =>
-              req.id === requestId
-                ? { ...req, status: role === "admin" ? "approved" : "rejected" }
-                : req,
-            ),
-          );
-        } else if (role === "admin") {
-          // Если requestId не указан, но роль админ - находим последнюю пендинг заявку этого юзера
-          setAdminRequests((prev) =>
-            prev.map((req) =>
-              req.userId === userId && req.status === "pending"
-                ? { ...req, status: "approved" }
-                : req,
-            ),
-          );
-        }
+        setAdminRequests((prev) =>
+          prev.map((req) =>
+            req.id === requestId
+              ? { ...req, status: role === "admin" ? "approved" : "rejected" }
+              : req,
+          ),
+        );
       }
+
+      // Если меняем роль текущего пользователя
+      if (user?.id === userId) {
+        setUser({ ...user, role });
+      }
+    } catch (error) {
+      console.error("Change role error:", error);
+    }
+  };
+
+  const getAllUsers = async (): Promise<Array<User>> => {
+    try {
+      const q = query(collection(db, "users"));
+      const querySnapshot = await getDocs(q);
+      const users: User[] = [];
+      querySnapshot.forEach((doc) => {
+        users.push(doc.data() as User);
+      });
+      return users;
+    } catch (error) {
+      console.error("Get all users error:", error);
+      return [];
+    }
+  };
+
+  const deleteAdminRequest = async (requestId: string) => {
+    try {
+      await deleteDoc(doc(db, "admin_requests", requestId));
+      setAdminRequests((prev) => prev.filter((req) => req.id !== requestId));
+    } catch (error) {
+      console.error("Delete request error:", error);
+    }
+  };
+
+  const deleteUser = async (userId: string) => {
+    try {
+      await deleteDoc(doc(db, "users", userId));
+
+      // Firebase Auth API не позволяет удалить другого пользователя без Firebase Admin SDK on backend.
+      // Но мы можем удалить его запись в Firestore, чтобы он не мог войти (проверка в login).
+
+      // Удаляем связанные заявки
+      const requestsQuery = query(
+        collection(db, "admin_requests"),
+        where("userId", "==", userId),
+      );
+      const requestsSnapshot = await getDocs(requestsQuery);
+      requestsSnapshot.forEach(async (doc) => {
+        await deleteDoc(doc.ref);
+      });
+
+      setAdminRequests((prev) => prev.filter((req) => req.userId !== userId));
+
+      if (user?.id === userId) {
+        await logout();
+      }
+    } catch (error) {
+      console.error("Delete user error:", error);
     }
   };
 
@@ -352,6 +371,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     <AuthContext.Provider
       value={{
         user,
+        loading,
         login,
         register,
         logout,
@@ -361,6 +381,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         submitAdminRequest,
         handleAdminRequest,
         changeUserRole,
+        getAllUsers,
+        deleteAdminRequest,
+        deleteUser,
       }}
     >
       {children}

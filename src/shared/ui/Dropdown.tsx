@@ -64,7 +64,7 @@ export function Dropdown({
       </button>
 
       {isOpen && (
-        <div className="absolute z-50 w-full mt-2 bg-gray-800 border border-gray-700 rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
+        <div className="absolute z-10000 w-full mt-2 bg-gray-800 border border-gray-700 rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
           <ul className="py-1">
             {options.map((option) => (
               <li key={option.id}>

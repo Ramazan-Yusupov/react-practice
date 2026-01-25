@@ -6,6 +6,7 @@ import { Settings } from "./Settings/Settings";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { TypeScriptPage } from "./TypeScriptPage/TypeScriptPage";
 import { AdminPage } from "./Admin/AdminPage";
+import { UsersPage } from "./Admin/UsersPage";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
           <Route path="/typescript" element={<TypeScriptPage />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/users" element={<UsersPage />} />
         </Routes>
       </Layout>
     </AuthProvider>
