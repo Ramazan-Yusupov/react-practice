@@ -1,4 +1,4 @@
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth, type User } from "@/contexts/AuthContext";
 import { Button } from "@/shared/ui/Button";
 import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -19,7 +19,7 @@ export function AdminPage() {
     isAuthenticated,
     getAllUsers,
   } = useAuth();
-  const [usersMap, setUsersMap] = useState<Record<string, any>>({});
+  const [usersMap, setUsersMap] = useState<Record<string, User>>({});
   const [, setTick] = useState(0); // For forcing re-render
   const [historySortMode, setHistorySortMode] = useState("default");
 
@@ -29,28 +29,6 @@ export function AdminPage() {
   ];
 
   const isSuperAdmin = user?.email === "frontenddev747@gmail.com";
-
-  // Загружаем пользователей для отображения аватарок и имен
-  useEffect(() => {
-    const loadUsers = async () => {
-      const users = await getAllUsers();
-      const map: Record<string, any> = {};
-      users.forEach((u) => {
-        map[u.id] = u;
-      });
-      setUsersMap(map);
-    };
-    loadUsers();
-  }, [getAllUsers, adminRequests]); // Обновляем при изменении заявок
-
-  // Защита роута
-  if (!isAuthenticated || user?.role !== "admin") {
-    return <Navigate to="/" replace />;
-  }
-
-  const pendingRequests = adminRequests.filter(
-    (req) => req.status === "pending",
-  );
 
   const processedRequests = useMemo(() => {
     let requests = adminRequests.filter((req) => req.status !== "pending");
@@ -70,8 +48,30 @@ export function AdminPage() {
     });
   }, [adminRequests, historySortMode]);
 
+  // Загружаем пользователей для отображения аватарок и имен
+  useEffect(() => {
+    const loadUsers = async () => {
+      const users = await getAllUsers();
+      const map: Record<string, User> = {};
+      users.forEach((u) => {
+        map[u.id] = u;
+      });
+      setUsersMap(map);
+    };
+    loadUsers();
+  }, [getAllUsers, adminRequests]); // Обновляем при изменении заявок
+
+  // Защита роута
+  if (!isAuthenticated || user?.role !== "admin") {
+    return <Navigate to="/" replace />;
+  }
+
+  const pendingRequests = adminRequests.filter(
+    (req) => req.status === "pending",
+  );
+
   return (
-    <div className="max-w-[1440px] mx-auto py-10 px-8">
+    <div className="max-w-360 mx-auto py-10 px-8">
       <div className="flex items-center justify-between mb-10">
         <div>
           <h1 className="text-4xl font-black text-white mb-2 uppercase tracking-tighter italic">

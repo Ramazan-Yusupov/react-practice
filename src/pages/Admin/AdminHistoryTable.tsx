@@ -8,7 +8,7 @@ import { useAuth } from "@/contexts/AuthContext";
 interface AdminHistoryTableProps {
   requests: AdminRequest[];
   isSuperAdmin: boolean;
-  roleOptions: { id: string; label: string; value: any }[];
+  roleOptions: { id: string; label: string; value: string }[];
   onChangeRole: (
     userId: string,
     newRole: "admin" | "user",

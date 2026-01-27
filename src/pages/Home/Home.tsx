@@ -14,13 +14,7 @@ export default function Home() {
         maxHeight={360}
       >
         <CodeBlock codeTitle="Frontend" code="Frontend" isBordered />
-        <InterfaceType
-          disabled
-          count={0}
-          status="online"
-          message="Submited"
-          names={["Frontend, Backend, Fullstack"]}
-        />
+        <InterfaceType />
       </Card>
     </div>
   );

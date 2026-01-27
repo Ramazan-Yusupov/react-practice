@@ -47,7 +47,7 @@ export function UsersPage() {
   }
 
   return (
-    <div className="max-w-[1400px] mx-auto py-10">
+    <div className="max-w-350 mx-auto py-10">
       <div className="flex items-center justify-between mb-10">
         <div>
           <h1 className="text-4xl font-black text-white mb-2 uppercase tracking-tighter italic">
