@@ -3,10 +3,10 @@ import { CodeBlock } from "./CodeBlock";
 import { useState } from "react";
 import { devsMock } from "@/mockApi/itemsMock";
 
-export function FilterItems() {
+export function FilterSearch() {
   const [query, setQuery] = useState("");
 
-  const filteredItems = devsMock.filter(
+  const filteredSearch = devsMock.filter(
     (item) =>
       item.dev.toLowerCase().includes(query.toLowerCase()) ||
       item.lang.toLowerCase().includes(query.toLowerCase()),
@@ -18,7 +18,7 @@ export function FilterItems() {
         placeholder="Search"
         onChange={(e) => setQuery(e.target.value)}
       />
-      {filteredItems.map((item) => (
+      {filteredSearch.map((item) => (
         <CodeBlock
           isBordered
           key={item.id}
