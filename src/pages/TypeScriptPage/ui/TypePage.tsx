@@ -59,22 +59,22 @@ export function TypePage({
 }: Omit<TypeProps, "id">) {
   return (
     <div className="space-border">
-      <CodeBlock code={data} codeTitle={text} isBordered />
-      <CodeBlock code={data} codeTitle={age} isBordered />
-      <CodeBlock code={role} codeTitle="Role" isBordered />
-      <CodeBlock code={otherRole} codeTitle="Other Role" isBordered />
-      <CodeBlock code={excludedRole} codeTitle="Excluded Role" isBordered />
+      <CodeBlock codeL={data} codeTitle={text} isBordered />
+      <CodeBlock codeL={data} codeTitle={age} isBordered />
+      <CodeBlock codeL={role} codeTitle="Role" isBordered />
+      <CodeBlock codeL={otherRole} codeTitle="Other Role" isBordered />
+      <CodeBlock codeL={excludedRole} codeTitle="Excluded Role" isBordered />
       <CodeBlock
-        code={`${user.age} - ${getUser("123", 23).name}`}
+        codeL={`${user.age} - ${getUser("123", 23).name}`}
         codeTitle="User"
         isBordered
       />
-      <CodeBlock code={userParams[0]} codeTitle="User Params" isBordered />
-      <CodeBlock code={fetchD.name} codeTitle={fetchData.name} isBordered />
-      <CodeBlock code={strL} codeTitle="Lowercase String" isBordered />
-      <CodeBlock code={strU} codeTitle="Uppercase String" isBordered />
-      <CodeBlock code={strC} codeTitle="Capitalized String" isBordered />
-      <CodeBlock code={strUC} codeTitle="Uncapitalized String" isBordered />
+      <CodeBlock codeL={userParams[0]} codeTitle="User Params" isBordered />
+      <CodeBlock codeL={fetchD.name} codeTitle={fetchData.name} isBordered />
+      <CodeBlock codeL={strL} codeTitle="Lowercase String" isBordered />
+      <CodeBlock codeL={strU} codeTitle="Uppercase String" isBordered />
+      <CodeBlock codeL={strC} codeTitle="Capitalized String" isBordered />
+      <CodeBlock codeL={strUC} codeTitle="Uncapitalized String" isBordered />
     </div>
   );
 }

@@ -1,21 +1,31 @@
 interface CodeProps {
   onClick?: () => void;
   isBordered?: boolean;
-  code?: React.ReactNode;
+  codeL?: React.ReactNode;
+  codeR?: React.ReactNode;
   codeTitle: React.ReactNode;
-  color?: "white" | "green" | "red" | "yellow";
+  colorL?: "white" | "green" | "red" | "yellow";
+  colorR?: "white" | "green" | "red" | "yellow";
   colorTitle?: "white" | "green" | "red" | "yellow";
 }
 
 export function CodeBlock({
-  code,
+  codeL,
+  codeR,
   onClick,
   codeTitle,
   isBordered,
-  color = "green",
+  colorL = "green",
+  colorR = "green",
   colorTitle = "white",
 }: CodeProps) {
-  const colors = {
+  const colorsL = {
+    red: "text-red-300",
+    white: "text-white",
+    green: "text-green-300",
+    yellow: "text-yellow-300",
+  };
+  const colorsR = {
     red: "text-red-300",
     white: "text-white",
     green: "text-green-300",
@@ -35,14 +45,20 @@ export function CodeBlock({
       className={`flex-between gap-10 ${isBordered ? "border-2 rounded-2xl p-3" : ""}`}
     >
       <div className={`${colorsTitle[colorTitle]}`}>{codeTitle}</div>
-      <code className={`${colors[color]}`}>{code}</code>
+      <div className="flex gap-3">
+        {codeL && <code className={`${colorsL[colorL]}`}>{codeL}</code>}
+        {codeR && <code className={`${colorsR[colorR]}`}>{codeR}</code>}
+      </div>
     </button>
   ) : (
     <div
       className={`flex-between gap-10 ${isBordered ? "border-2 rounded-2xl p-3" : ""}`}
     >
       <div className={`${colorsTitle[colorTitle]}`}>{codeTitle}</div>
-      <code className={`${colors[color]}`}>{code}</code>
+      <div className="flex gap-3">
+        {codeL && <code className={`${colorsL[colorL]}`}>{codeL}</code>}
+        {codeR && <code className={`${colorsR[colorR]}`}>{codeR}</code>}
+      </div>
     </div>
   );
 }

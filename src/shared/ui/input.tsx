@@ -6,7 +6,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export function Input({ type = "text", className, ...props }: InputProps) {
   const classTypeInput =
-    "px-4 py-2 border border-gray-300 rounded-lg placeholder:text-gray-400";
+    "px-4 py-2 border-2 border-gray-300 rounded-lg placeholder:text-gray-400";
   const classTypeRange = "w-full cursor-pointer";
 
   return (

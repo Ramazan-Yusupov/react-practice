@@ -154,7 +154,7 @@ export function TypeScriptPage() {
             <CodeBlock
               isBordered
               codeTitle={`Record - ${userRecord.admin.text}`}
-              code={userRecord.user.text}
+              codeL={userRecord.user.text}
             />
           </div>
         )}
@@ -176,7 +176,7 @@ export function TypeScriptPage() {
               key={`user-${user.id}`}
               isBordered
               codeTitle={`${user.name} - user-${user.id}`}
-              code={user.age}
+              codeL={user.age}
             />
           ))}
         </div>
@@ -186,7 +186,7 @@ export function TypeScriptPage() {
               key={`address-${user.id}`}
               isBordered
               codeTitle={`${user.text} - address-${user.id}`}
-              code={`${user.address.street}, ${user.address.city}`}
+              codeL={`${user.address.street}, ${user.address.city}`}
             />
           ))}
         </div>
@@ -196,7 +196,7 @@ export function TypeScriptPage() {
               key={`user-${user.id}`}
               isBordered
               codeTitle={`${user.name} - user-${user.id}`}
-              code={user.age}
+              codeL={user.age}
             />
           ))}
         </div>
@@ -206,7 +206,7 @@ export function TypeScriptPage() {
               key={`user-${user.id}`}
               isBordered
               codeTitle={`${user.name}`}
-              code={user.id}
+              codeL={user.id}
             />
           ))}
         </div>
@@ -216,7 +216,7 @@ export function TypeScriptPage() {
               key={`user-${user.id}`}
               isBordered
               codeTitle={`${user.name}`}
-              code={`${user.age} - ${user.text} - ${user.address.street}, ${user.address.city} ${user.read}`}
+              codeL={`${user.age} - ${user.text} - ${user.address.street}, ${user.address.city} ${user.read}`}
             />
           ))}
         </div>
