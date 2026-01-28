@@ -5,13 +5,19 @@ import { devsMock } from "@/mockApi/itemsMock";
 
 export function FilterSearch() {
   const [query, setQuery] = useState("");
+  const [devs, setDevs] = useState(devsMock);
 
-  const filteredSearch = devsMock.filter(
+  const filteredSearch = devs.filter(
     (item) =>
       item.dev.toLowerCase().includes(query.toLowerCase()) ||
       item.lang.toLowerCase().includes(query.toLowerCase()) ||
       item.age.toString().includes(query.toString()),
   );
+
+  const handleDelete = (id: number) => {
+    setDevs((prevDevs) => prevDevs.filter((item) => item.id !== id));
+  };
+
   return (
     <>
       <Input
@@ -26,8 +32,12 @@ export function FilterSearch() {
           codeL={item.lang}
           codeR={item.age}
           codeTitle={item.dev}
+          onDelete={() => handleDelete(item.id)}
         />
       ))}
+      {filteredSearch.length === 0 && (
+        <p className="text-center">No results found.</p>
+      )}
     </>
   );
 }

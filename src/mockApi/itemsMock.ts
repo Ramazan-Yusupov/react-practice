@@ -8,6 +8,19 @@ type Types = {
   color: string;
 };
 
+export const countMock: Pick<Types, "id" | "name">[] = [
+  { id: 1, name: "Laptop" },
+  { id: 2, name: "Smartphone" },
+  { id: 3, name: "Headphones" },
+  { id: 4, name: "Tablet" },
+  { id: 5, name: "Keyboard" },
+  { id: 6, name: "Monitor" },
+  { id: 7, name: "Mouse" },
+  { id: 8, name: "Charger" },
+  { id: 9, name: "Speaker" },
+  { id: 10, name: "Webcam" },
+];
+
 export const itemsMock: Omit<Types, "dev" | "lang" | "age">[] = [
   { id: 1, name: "Laptop", price: 2033, color: "black" },
   { id: 2, name: "Smartphone", price: 422, color: "black" },

@@ -1,5 +1,5 @@
 import { Card } from "@/components/Card";
-import { FilterSearch } from "@/components/FilterSearch";
+import { CounterCard } from "@/components/CounterCard";
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
         title="Frontend"
         maxHeight={630}
       >
-        <FilterSearch />
+        <CounterCard />
       </Card>
     </div>
   );
