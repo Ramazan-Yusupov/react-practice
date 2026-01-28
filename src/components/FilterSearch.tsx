@@ -9,7 +9,8 @@ export function FilterSearch() {
   const filteredSearch = devsMock.filter(
     (item) =>
       item.dev.toLowerCase().includes(query.toLowerCase()) ||
-      item.lang.toLowerCase().includes(query.toLowerCase()),
+      item.lang.toLowerCase().includes(query.toLowerCase()) ||
+      item.age.toString().includes(query.toString()),
   );
   return (
     <>
@@ -23,6 +24,7 @@ export function FilterSearch() {
           isBordered
           key={item.id}
           codeL={item.lang}
+          codeR={item.age}
           codeTitle={item.dev}
         />
       ))}

@@ -1,15 +1,16 @@
 import { Input } from "@/shared/ui/Input";
+import { CodeBlock } from "@/components/CodeBlock";
 import { useState } from "react";
 import { devsMock } from "@/mockApi/itemsMock";
-import { CodeBlock } from "@/components/CodeBlock";
 
-export function FilterItemsA() {
+export function FilterSearchA() {
   const [query, setQuery] = useState("");
 
-  const filteredItems = devsMock.filter(
+  const filteredSearch = devsMock.filter(
     (item) =>
       item.dev.toLowerCase().includes(query.toLowerCase()) ||
-      item.lang.toLowerCase().includes(query.toLowerCase()),
+      item.lang.toLowerCase().includes(query.toLowerCase()) ||
+      item.age.toString().includes(query.toString()),
   );
   return (
     <>
@@ -18,11 +19,12 @@ export function FilterItemsA() {
         placeholder="Search"
         onChange={(e) => setQuery(e.target.value)}
       />
-      {filteredItems.map((item) => (
+      {filteredSearch.map((item) => (
         <CodeBlock
           isBordered
           key={item.id}
           codeL={item.lang}
+          codeR={item.age}
           codeTitle={item.dev}
         />
       ))}

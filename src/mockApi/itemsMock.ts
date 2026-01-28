@@ -1,5 +1,6 @@
 type Types = {
   id: number;
+  age: number;
   dev: string;
   lang: string;
   name: string;
@@ -7,7 +8,7 @@ type Types = {
   color: string;
 };
 
-export const itemsMock: Omit<Types, "dev" | "lang">[] = [
+export const itemsMock: Omit<Types, "dev" | "lang" | "age">[] = [
   { id: 1, name: "Laptop", price: 2033, color: "black" },
   { id: 2, name: "Smartphone", price: 422, color: "black" },
   { id: 3, name: "Headphones", price: 514, color: "white" },
@@ -21,14 +22,14 @@ export const itemsMock: Omit<Types, "dev" | "lang">[] = [
 ];
 
 export const devsMock: Omit<Types, "name" | "price" | "color">[] = [
-  { id: 1, dev: "Frontend", lang: "React.js" },
-  { id: 2, dev: "Backend", lang: "Node.js" },
-  { id: 3, dev: "FullStack", lang: "React.js + Node.js" },
-  { id: 4, dev: "DevOps", lang: "Docker" },
-  { id: 5, dev: "QU Engineer", lang: "Jest" },
-  { id: 6, dev: "Web Design", lang: "Figma" },
-  { id: 7, dev: "FullStack", lang: "Next.js + Express" },
-  { id: 8, dev: "Frontend", lang: "Angular" },
-  { id: 9, dev: "FullStack", lang: "React.js + Python" },
-  { id: 10, dev: "Frontend", lang: "Svelte" },
+  { id: 1, dev: "Frontend", lang: "React.js", age: 23 },
+  { id: 2, dev: "Backend", lang: "Node.js", age: 24 },
+  { id: 3, dev: "FullStack", lang: "React.js + Node.js", age: 23 },
+  { id: 4, dev: "DevOps", lang: "Docker", age: 26 },
+  { id: 5, dev: "QU Engineer", lang: "Jest", age: 30 },
+  { id: 6, dev: "Web Design", lang: "Figma", age: 25 },
+  { id: 7, dev: "FullStack", lang: "Next.js + Express", age: 27 },
+  { id: 8, dev: "Frontend", lang: "Angular", age: 21 },
+  { id: 9, dev: "FullStack", lang: "React.js + Python", age: 26 },
+  { id: 10, dev: "Frontend", lang: "Svelte", age: 22 },
 ];
