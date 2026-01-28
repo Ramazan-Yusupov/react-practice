@@ -10,7 +10,7 @@ export default function Home() {
         isErrorOnOff
         maxWidth="xl"
         title="Frontend"
-        maxHeight={360}
+        maxHeight={630}
       >
         <FilterSearch />
       </Card>

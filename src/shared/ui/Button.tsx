@@ -4,6 +4,7 @@ interface ButtonProps {
   disabled?: boolean;
   className?: string;
   onClick?: () => void;
+  active?: boolean;
   children?: React.ReactNode;
   size?: "sm" | "md" | "lg";
   type?: "button" | "submit" | "reset";
@@ -12,6 +13,7 @@ interface ButtonProps {
 
 export function Button({
   title,
+  active,
   onClick,
   maxWidth,
   children,
@@ -35,6 +37,8 @@ export function Button({
     lg: "px-6 py-3 text-lg",
   };
 
+  const activeButtonStyles = active ? "bg-green-500 hover:bg-green-600" : "";
+
   const disabledStyles = disabled ? "opacity-50 cursor-not-allowed" : "";
 
   return (
@@ -42,7 +46,7 @@ export function Button({
       type={type}
       disabled={disabled}
       onClick={onClick}
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${disabledStyles} ${className}`}
+      className={`${baseStyles} ${activeButtonStyles} ${variants[variant]} ${sizes[size]} ${disabledStyles} ${className}`}
       style={{
         maxWidth: maxWidth,
       }}

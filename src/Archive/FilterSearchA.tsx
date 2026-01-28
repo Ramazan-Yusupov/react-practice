@@ -3,7 +3,7 @@ import { useState } from "react";
 import { devsMock } from "@/mockApi/itemsMock";
 import { CodeBlock } from "@/components/CodeBlock";
 
-export function FilterItemsArchive() {
+export function FilterItemsA() {
   const [query, setQuery] = useState("");
 
   const filteredItems = devsMock.filter(
