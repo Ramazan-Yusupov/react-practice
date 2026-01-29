@@ -1,4 +1,11 @@
+import { useState } from "react";
 import { getAvatarUrl } from "@/lib/avatarUtils";
+
+type UserI = {
+  name: string;
+  email: string;
+  avatar: string;
+};
 
 interface AvatarProps {
   img?: string;
@@ -6,9 +13,9 @@ interface AvatarProps {
   isAnonymous?: boolean;
   onClick?: () => void;
   size?: "sm" | "md" | "lg";
+  userInfo?: UserI;
 }
 
-// Анонимная аватарка (для неавторизованных пользователей)
 const AnonymousAvatar = ({ size = "md" }: { size?: "sm" | "md" | "lg" }) => {
   const sizeClasses = {
     sm: "w-8 h-8",
@@ -41,51 +48,66 @@ export function Avatar({
   isAnonymous = false,
   onClick,
   size = "md",
+  userInfo,
 }: AvatarProps) {
+  const [showTooltip, setShowTooltip] = useState(false);
+
   const sizeClasses = {
     sm: "w-8 h-8",
     md: "w-12 h-12",
     lg: "w-16 h-16",
   };
 
-  if (isAnonymous) {
-    return (
-      <button onClick={onClick} className="cursor-pointer">
-        <AnonymousAvatar size={size} />
-      </button>
-    );
-  }
+  const handleMouseEnter = () => setShowTooltip(true);
+  const handleMouseLeave = () => setShowTooltip(false);
 
-  // Если есть кастомная картинка, используем её
-  if (img) {
-    return (
-      <button onClick={onClick} className="cursor-pointer">
+  const avatarElement = (() => {
+    if (isAnonymous) {
+      return <AnonymousAvatar size={size} />;
+    }
+    if (img) {
+      return (
         <img
           src={img}
           alt="Avatar"
           className={`${sizeClasses[size]} rounded-full border-2 border-gray-300 dark:border-gray-600 object-cover`}
         />
-      </button>
-    );
-  }
-
-  // Если есть seed, генерируем рандомную аватарку (как в GitHub)
-  if (avatarSeed) {
-    return (
-      <button onClick={onClick} className="cursor-pointer">
+      );
+    }
+    if (avatarSeed) {
+      return (
         <img
           src={getAvatarUrl(avatarSeed)}
           alt="Avatar"
-          className={`${sizeClasses[size]} rounded-full border-2 border-gray-300 dark:border-gray-600`}
+          className={`${sizeClasses[size]} rounded-full border-2 border-gray-300`}
         />
-      </button>
-    );
-  }
+      );
+    }
+    return <AnonymousAvatar size={size} />;
+  })();
 
-  // По умолчанию - анонимная
   return (
-    <button onClick={onClick} className="cursor-pointer">
-      <AnonymousAvatar size={size} />
-    </button>
+    <div
+      className="relative inline-block"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <button onClick={onClick} className="cursor-pointer">
+        {avatarElement}
+      </button>
+
+      {showTooltip && userInfo && (
+        <div className="absolute z-1000 top-full mt-2 transform -translate-x-1 p-3 w-70 bg-black border-2 rounded-xl text-sm flex gap-3 items-center">
+          <img
+            src={userInfo.avatar || ""}
+            className="w-8 h-8 rounded-full border-2 border-gray-300"
+          />
+          <div className="flex flex-col overflow-hidden">
+            <div className="font-semibold">{userInfo.name}</div>
+            <div className="">{userInfo.email}</div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

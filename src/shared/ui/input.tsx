@@ -9,6 +9,8 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const classTypeInput =
   "px-4 py-2 border-2 border-gray-300 rounded-lg placeholder:text-gray-400 outline-none";
 const classTypeRange = "w-full cursor-pointer";
+const classTypeCheckbox =
+  "w-5 h-5 cursor-pointer accent-blue-500 border-2 border-gray-300 rounded-2xl";
 
 export function Input({
   type = "text",
@@ -37,11 +39,15 @@ export function Input({
         ref={inputRef}
         type={type}
         className={`w-full ${
-          type === "range" ? classTypeRange : classTypeInput
+          type === "range"
+            ? classTypeRange
+            : type === "checkbox"
+              ? classTypeCheckbox
+              : classTypeInput
         } ${className || ""}`}
         {...props}
       />
-      {isCloseIcon && (
+      {isCloseIcon && type !== "checkbox" && (
         <div
           className={`absolute right-3 top-1/2 transform -translate-y-1/2 ${!props.value ? "hidden" : ""}`}
         >

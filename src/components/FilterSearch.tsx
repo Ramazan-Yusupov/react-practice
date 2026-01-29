@@ -1,11 +1,24 @@
 import { Input } from "@/shared/ui/Input";
 import { CodeBlock } from "./CodeBlock";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { devsMock } from "@/mockApi/itemsMock";
 
 export function FilterSearch() {
   const [query, setQuery] = useState("");
   const [devs, setDevs] = useState(devsMock);
+
+  // Load from localStorage on mount
+  useEffect(() => {
+    const savedDevs = localStorage.getItem("devs");
+    if (savedDevs) {
+      setDevs(JSON.parse(savedDevs));
+    }
+  }, []);
+
+  // Save to localStorage when devs change
+  useEffect(() => {
+    localStorage.setItem("devs", JSON.stringify(devs));
+  }, [devs]);
 
   const filteredSearch = devs.filter(
     (item) =>

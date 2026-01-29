@@ -51,7 +51,11 @@ export function Card({
           <div className="w-full">
             {" "}
             {avatar && isAuthenticated && user ? (
-              <Avatar img={user.avatar} avatarSeed={user.avatarSeed} />
+              <Avatar
+                img={user.avatar}
+                avatarSeed={user.avatarSeed}
+                userInfo={{ name: user.name || "", email: user.email || "", avatar: user.avatar || "" }}
+              />
             ) : (
               <Avatar isAnonymous />
             )}

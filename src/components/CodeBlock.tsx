@@ -1,4 +1,4 @@
-import { IconButton } from "@/shared/ui/Iconbutton";
+import { IconButton } from "@/shared/ui/IconButton";
 import { FaTrash } from "react-icons/fa6";
 
 interface CodeProps {
