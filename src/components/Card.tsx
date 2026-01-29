@@ -1,4 +1,6 @@
+import { Avatar } from "@/shared/ui/Avatar";
 import { StatusOnOffline } from "./StatusOnOffline";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface CardProps {
   title?: string;
@@ -21,6 +23,7 @@ export function Card({
   className,
   isErrorOnOff,
 }: CardProps) {
+  const { user, isAuthenticated } = useAuth();
   const maxWidthClass: { [key: string]: string } = {
     sm: "max-w-sm",
     md: "max-w-md",
@@ -46,11 +49,11 @@ export function Card({
       >
         <header className="flex justify-between items-center w-full">
           <div className="w-full">
-            {avatar && (
-              <img
-                src="/frontend.jpg"
-                className="w-10 h-10 rounded-full border-2 border-gray-300"
-              />
+            {" "}
+            {avatar && isAuthenticated && user ? (
+              <Avatar img={user.avatar} avatarSeed={user.avatarSeed} />
+            ) : (
+              <Avatar isAnonymous />
             )}
           </div>
           {isOnline && <StatusOnOffline isOnline={isErrorOnOff} />}

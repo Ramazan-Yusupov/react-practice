@@ -1,5 +1,5 @@
 import { Card } from "@/components/Card";
-import { FindSearch } from "@/components/FindSearch";
+import { FilterSearch } from "@/components/FilterSearch";
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
         title="Frontend"
         maxHeight={630}
       >
-        <FindSearch />
+        <FilterSearch />
       </Card>
     </div>
   );
