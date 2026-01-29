@@ -9,9 +9,9 @@ export function FilterSearch() {
 
   const filteredSearch = devs.filter(
     (item) =>
+      item.age.toString().includes(query.toString()) ||
       item.dev.toLowerCase().includes(query.toLowerCase()) ||
-      item.lang.toLowerCase().includes(query.toLowerCase()) ||
-      item.age.toString().includes(query.toString()),
+      item.lang.toLowerCase().includes(query.toLowerCase()),
   );
 
   const handleDelete = (id: number) => {
