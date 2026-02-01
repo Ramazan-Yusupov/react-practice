@@ -1,18 +1,17 @@
-import { useEffect, useState } from "react";
 import { Card } from "@/components/Card";
 import { CodeBlock } from "@/components/CodeBlock";
+import {
+  decrement,
+  increment,
+  incrementByAmount,
+} from "@/features/Counter/counter";
 import { Button } from "@/shared/ui/Button";
+import type { AppDispatch, RootState } from "@/store/store";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Home() {
-  const [count, setCount] = useState(() => {
-    const saved = localStorage.getItem("count");
-    return saved !== null ? Number(saved) : 0;
-  });
-
-  useEffect(() => {
-    localStorage.setItem("count", count.toString());
-  }, [count]);
-
+  const count = useSelector((state: RootState) => state.counter.value);
+  const dispatch = useDispatch<AppDispatch>();
   return (
     <div>
       <Card
@@ -23,17 +22,23 @@ export default function Home() {
         title="Frontend"
         maxHeight={636}
       >
+        <Button variant="primary" onClick={() => dispatch(increment())}>
+          Increment +
+        </Button>
+        <Button variant="primary" onClick={() => dispatch(decrement())}>
+          Decrement -
+        </Button>
+        <Button
+          variant="primary"
+          onClick={() => dispatch(incrementByAmount(5))}
+        >
+          Increment +5
+        </Button>
         <CodeBlock
           isBordered
-          codeL="Count:"
           codeTitle="Frontend"
-          codeR={`${count}/100`}
-          onClick={() => setCount(count + 1)}
-        />
-        <Button
-          title="Сбросить"
-          disabled={count === 0}
-          onClick={() => setCount(0)}
+          codeL={count}
+          codeR={count * 2}
         />
       </Card>
     </div>
