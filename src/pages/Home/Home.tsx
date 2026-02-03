@@ -1,17 +1,27 @@
-import { Card } from "@/components/Card";
-import { CodeBlock } from "@/components/CodeBlock";
-import {
-  decrement,
-  increment,
-  incrementByAmount,
-} from "@/features/Counter/counter";
-import { Button } from "@/shared/ui/Button";
-import type { AppDispatch, RootState } from "@/store/store";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchUsers } from "@/store/userSlice";
+import { type RootState, type AppDispatch } from "@/store/store";
+import { Card } from "@/shared/ui/Card";
+import { UserList } from "@/components/UserList";
+import { Button } from "@/shared/ui/Button";
+import { CodeBlock } from "@/shared/ui/CodeBlock";
+import { FlexContainer } from "@/shared/ui/FlexContainer";
+import { LoadingUI } from "@/shared/ui/LoadingUI";
+import { ErrorUI } from "@/shared/ui/ErrorUI";
 
 export default function Home() {
-  const count = useSelector((state: RootState) => state.counter.value);
   const dispatch = useDispatch<AppDispatch>();
+  const users = useSelector((state: RootState) => state.users.users);
+  const error = useSelector((state: RootState) => state.users.error);
+  const loading = useSelector((state: RootState) => state.users.loading);
+
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
+
   return (
     <div>
       <Card
@@ -22,24 +32,21 @@ export default function Home() {
         title="Frontend"
         maxHeight={636}
       >
-        <Button variant="primary" onClick={() => dispatch(increment())}>
-          Increment +
-        </Button>
-        <Button variant="primary" onClick={() => dispatch(decrement())}>
-          Decrement -
-        </Button>
-        <Button
-          variant="primary"
-          onClick={() => dispatch(incrementByAmount(5))}
-        >
-          Increment +5
-        </Button>
         <CodeBlock
           isBordered
-          codeTitle="Frontend"
-          codeL={count}
-          codeR={count * 2}
+          codeL="Value:"
+          codeR={count || "0"}
+          codeTitle="Current Count"
         />
+        <FlexContainer flex gap={10} items="center" justify="between">
+          <Button title="Decrement" onClick={() => setCount(count - 1)} />
+          <Button title="Increment" onClick={() => setCount(count + 1)} />
+        </FlexContainer>
+
+        {loading && <LoadingUI isLoading={loading} />}
+        {error && <ErrorUI isError={!!error} />}
+
+        <UserList users={users} />
       </Card>
     </div>
   );

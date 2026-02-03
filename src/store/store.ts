@@ -1,10 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "../features/Counter/counter";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import userReducer from "./userSlice";
+import { counterReducer } from "./counterSlice";
+
+const rootReducer = combineReducers({
+  users: userReducer,
+  counterState: counterReducer,
+});
 
 export const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-  },
+  reducer: rootReducer,
 });
 
 export type RootState = ReturnType<typeof store.getState>;

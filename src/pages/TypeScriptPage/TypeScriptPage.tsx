@@ -1,5 +1,5 @@
-import { Card } from "@/components/Card";
-import { CodeBlock } from "@/components/CodeBlock";
+import { Card } from "@/shared/ui/Card";
+import { CodeBlock } from "@/shared/ui/CodeBlock";
 import { TypePage } from "./ui/TypePage";
 
 type User = {

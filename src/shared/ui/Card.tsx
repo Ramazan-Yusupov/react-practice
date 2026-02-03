@@ -54,7 +54,11 @@ export function Card({
               <Avatar
                 img={user.avatar}
                 avatarSeed={user.avatarSeed}
-                userInfo={{ name: user.name || "", email: user.email || "", avatar: user.avatar || "" }}
+                userInfo={{
+                  name: user.name || "",
+                  email: user.email || "",
+                  avatar: user.avatar || "",
+                }}
               />
             ) : (
               <Avatar isAnonymous />

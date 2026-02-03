@@ -1,4 +1,4 @@
-import { CodeBlock } from "@/components/CodeBlock";
+import { CodeBlock } from "@/shared/ui/CodeBlock";
 
 type Role = "admin" | "user" | "moderator";
 type OtherRole = "testing" | "admin" | "user" | "security";

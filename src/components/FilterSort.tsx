@@ -1,5 +1,5 @@
 import { Input } from "@/shared/ui/Input";
-import { CodeBlock } from "./CodeBlock";
+import { CodeBlock } from "../shared/ui/CodeBlock";
 import { useState } from "react";
 import { itemsMock } from "@/mockApi/itemsMock";
 import { Button } from "@/shared/ui/Button";

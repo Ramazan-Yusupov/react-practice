@@ -1,4 +1,4 @@
-import { CodeBlock } from "@/components/CodeBlock";
+import { CodeBlock } from "@/shared/ui/CodeBlock";
 import { countMock } from "@/mockApi/itemsMock";
 import { useState } from "react";
 
