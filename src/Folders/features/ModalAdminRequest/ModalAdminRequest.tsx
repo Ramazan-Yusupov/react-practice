@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import { Input } from "@/shared/ui/Input";
 import { Button } from "@/shared/ui/Button";
 

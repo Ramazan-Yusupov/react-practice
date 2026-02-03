@@ -1,4 +1,4 @@
-import { useAuth, type User } from "@/contexts/AuthContext";
+import { useAuth, type User } from "@/Folders/contexts/AuthContext";
 import { Button } from "@/shared/ui/Button";
 import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";

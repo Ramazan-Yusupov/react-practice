@@ -23,7 +23,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { auth, db } from "../firebase";
+import { auth, db } from "../../firebase";
 
 export interface User {
   id: string;

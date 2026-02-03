@@ -1,4 +1,4 @@
-import { useAuth, type User } from "@/contexts/AuthContext";
+import { useAuth, type User } from "@/Folders/contexts/AuthContext";
 import { useState, useEffect, useMemo } from "react";
 import { Avatar } from "@/shared/ui/Avatar";
 import { SortDropdown } from "@/shared/ui/SortDropdown";

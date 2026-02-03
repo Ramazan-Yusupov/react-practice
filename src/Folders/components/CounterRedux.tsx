@@ -1,12 +1,12 @@
 import { Button } from "@/shared/ui/Button";
-import { CodeBlock } from "../shared/ui/CodeBlock";
+import { CodeBlock } from "../../shared/ui/CodeBlock";
 import {
   increment,
   decrement,
   selectCounter,
   type CounterId,
 } from "@/store/counterSlice";
-import { useAppDispatch, useAppSelector } from "@/hooks/useCounterReduce";
+import { useAppDispatch, useAppSelector } from "../hooks/useCounterReduce";
 
 export function CounterRedux({
   title,

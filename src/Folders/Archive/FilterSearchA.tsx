@@ -1,9 +1,9 @@
 import { Input } from "@/shared/ui/Input";
-import { CodeBlock } from "../shared/ui/CodeBlock";
+import { CodeBlock } from "../../shared/ui/CodeBlock";
 import { useState, useEffect } from "react";
-import { devsMock } from "@/mockApi/itemsMock";
+import { devsMock } from "../mockApi/itemsMock";
 
-export function FilterSearch() {
+export function FilterSearchA() {
   const [query, setQuery] = useState("");
   const [devs, setDevs] = useState(devsMock);
 

@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./Home/Home";
 import { Layout } from "@/layout/Layout";
 import { Settings } from "./Settings/Settings";
-import { AuthProvider } from "@/contexts/AuthContext";
+import { AuthProvider } from "@/Folders/contexts/AuthContext";
 import { TypeScriptPage } from "./TypeScriptPage/TypeScriptPage";
 import { AdminPage } from "./Admin/AdminPage";
 import { UsersPage } from "./Admin/UsersPage";

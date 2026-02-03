@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getAvatarUrl } from "@/lib/avatarUtils";
+import { getAvatarUrl } from "@/Folders/lib/avatarUtils";
 
 type UserI = {
   name: string;

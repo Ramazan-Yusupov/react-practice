@@ -1,9 +1,9 @@
 import { AdminTable } from "@/shared/ui/AdminTable";
-import type { AdminRequest } from "@/contexts/AuthContext";
+import type { AdminRequest } from "@/Folders/contexts/AuthContext";
 import { Avatar } from "@/shared/ui/Avatar";
 import { Dropdown } from "@/shared/ui/Dropdown";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/Folders/contexts/AuthContext";
 
 interface AdminHistoryTableProps {
   requests: AdminRequest[];

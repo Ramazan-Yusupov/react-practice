@@ -1,10 +1,10 @@
 import { CiSettings } from "react-icons/ci";
 import { AiFillFileText, AiFillHome } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
-import { ModalAuth } from "@/features/ModalAuth/ModalAuth";
+import { ModalAuth } from "../../features/ModalAuth/ModalAuth";
 import { useState } from "react";
 import { Avatar } from "@/shared/ui/Avatar";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import { RiAdminFill, RiUser2Fill } from "react-icons/ri";
 
 export function Sidebar() {

@@ -1,10 +1,10 @@
 import { Input } from "@/shared/ui/Input";
-import { CodeBlock } from "../shared/ui/CodeBlock";
+import { CodeBlock } from "../../shared/ui/CodeBlock";
 import { useState } from "react";
-import { devsMock } from "@/mockApi/itemsMock";
+import { devsMock } from "../mockApi/itemsMock";
 import { Button } from "@/shared/ui/Button";
 
-export function FindSearch() {
+export function FindSearchA() {
   const [searchName, setSearchName] = useState("");
   const [devs, setDevs] = useState(devsMock);
 

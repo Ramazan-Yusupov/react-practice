@@ -1,9 +1,9 @@
 import { useState, useRef } from "react";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/Folders/contexts/AuthContext";
 import { Input } from "@/shared/ui/Input";
 import { Avatar } from "@/shared/ui/Avatar";
 import { Button } from "@/shared/ui/Button";
-import { ModalAdminRequest } from "@/features/ModalAdminRequest/ModalAdminRequest";
+import { ModalAdminRequest } from "@/Folders/features/ModalAdminRequest/ModalAdminRequest";
 
 export function Settings() {
   const { user, updateUser, logout, isAuthenticated } = useAuth();

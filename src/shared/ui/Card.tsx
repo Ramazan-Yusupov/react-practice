@@ -1,6 +1,6 @@
 import { Avatar } from "@/shared/ui/Avatar";
 import { StatusOnOffline } from "./StatusOnOffline";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/Folders/contexts/AuthContext";
 
 interface CardProps {
   title?: string;

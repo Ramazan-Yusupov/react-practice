@@ -1,5 +1,5 @@
 import type { UserProps } from "@/store/userSlice";
-import { CodeBlock } from "../shared/ui/CodeBlock";
+import { CodeBlock } from "../../shared/ui/CodeBlock";
 
 export function UserList({ users }: { users: UserProps[] | unknown }) {
   const list: UserProps[] = Array.isArray(users) ? users : [];

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "@/store/userSlice";
 import { type RootState, type AppDispatch } from "@/store/store";
 import { Card } from "@/shared/ui/Card";
-import { UserList } from "@/components/UserList";
+import { UserList } from "@/Folders/components/UserList";
 import { Button } from "@/shared/ui/Button";
 import { CodeBlock } from "@/shared/ui/CodeBlock";
 import { FlexContainer } from "@/shared/ui/FlexContainer";

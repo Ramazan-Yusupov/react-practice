@@ -1,6 +1,6 @@
 import { Input } from "@/shared/ui/Input";
 import { useState } from "react";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 interface ModalProps {
   isOpen: boolean;
