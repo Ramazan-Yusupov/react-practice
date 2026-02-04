@@ -1,8 +1,12 @@
-import type { UserProps } from "@/store/userSlice";
+import type { User } from "@/store/userSlice";
 import { CodeBlock } from "../../shared/ui/CodeBlock";
 
-export function UserList({ users }: { users: UserProps[] | unknown }) {
-  const list: UserProps[] = Array.isArray(users) ? users : [];
+interface UserListProps {
+  users?: User[];
+}
+
+export function UserList({ users }: UserListProps) {
+  const list: User[] = Array.isArray(users) ? users : [];
 
   return (
     <div className="border-t-3 mt-5 pt-5 space-y-5">
@@ -10,7 +14,8 @@ export function UserList({ users }: { users: UserProps[] | unknown }) {
         <CodeBlock
           isBordered
           key={user.id}
-          codeL={user.email}
+          codeR={user.email}
+          codeL={user.username}
           codeTitle={user.name}
         />
       ))}

@@ -1,40 +1,34 @@
 import {
-  createSlice,
   createAsyncThunk,
+  createSlice,
   type PayloadAction,
 } from "@reduxjs/toolkit";
 
-export interface UserProps {
+export interface User {
   id: number;
   name: string;
   email: string;
+  username: string;
 }
 
-interface UsersState {
-  users: UserProps[];
+interface UserState {
+  users: User[];
   loading: boolean;
   error: string | null;
 }
 
-const initialState: UsersState = {
+const initialState: UserState = {
   users: [],
   loading: false,
   error: null,
 };
 
-// Async thunk для загрузки пользователей
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
-  const response = await fetch(
-    "https://jsonplaceholder.typicode.com/users?_limit=5",
-  );
-
+  const response = await fetch("https://jsonplaceholder.typicode.com/users");
   if (!response.ok) {
-    // Генерируем ошибку, чтобы thunk перешёл в rejected
-    throw new Error(`HTTP error! status: ${response.status}`);
+    throw new Error("Failed to fetch users");
   }
-
-  const data: UserProps[] = await response.json();
-  return data;
+  return (await response.json()) as User[];
 });
 
 const userSlice = createSlice({
@@ -47,13 +41,10 @@ const userSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(
-        fetchUsers.fulfilled,
-        (state, action: PayloadAction<UserProps[]>) => {
-          state.loading = false;
-          state.users = action.payload;
-        },
-      )
+      .addCase(fetchUsers.fulfilled, (state, action: PayloadAction<User[]>) => {
+        state.loading = false;
+        state.users = action.payload;
+      })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch users";
