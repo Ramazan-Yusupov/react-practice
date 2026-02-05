@@ -2,7 +2,6 @@ import clsx from "clsx";
 
 interface FlexContainerProps {
   gap?: number;
-  flex?: boolean;
   className?: string;
   children: React.ReactNode;
   wrap?: "nowrap" | "wrap" | "wrap-reverse";
@@ -15,7 +14,6 @@ interface FlexContainerProps {
 export function FlexContainer(props: FlexContainerProps) {
   const {
     gap,
-    flex,
     wrap,
     items,
     justify,
@@ -25,8 +23,7 @@ export function FlexContainer(props: FlexContainerProps) {
     alignContent,
   } = props;
 
-  const classes = clsx(className, {
-    flex: flex,
+  const classes = clsx(className, "flex", {
     [`flex-${direction}`]: direction,
     [`flex-${wrap}`]: wrap,
     [`items-${items}`]: items,

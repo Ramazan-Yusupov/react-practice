@@ -1,8 +1,10 @@
 import {
   createAsyncThunk,
+  createSelector,
   createSlice,
   type PayloadAction,
 } from "@reduxjs/toolkit";
+import type { RootState } from "./store";
 
 export interface User {
   id: number;
@@ -15,12 +17,14 @@ interface UserState {
   users: User[];
   loading: boolean;
   error: string | null;
+  sortBy: "name" | "email" | "username";
 }
 
 const initialState: UserState = {
   users: [],
   loading: false,
   error: null,
+  sortBy: "name",
 };
 
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
@@ -31,10 +35,26 @@ export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
   return (await response.json()) as User[];
 });
 
+export const selectSortedUsers = createSelector(
+  (state: RootState) => state.users.users,
+  (state: RootState) => state.users.sortBy,
+  (users, sortBy) => {
+    return [...users].sort((a, b) => {
+      if (a[sortBy] < b[sortBy]) return -1;
+      if (a[sortBy] > b[sortBy]) return 1;
+      return 0;
+    });
+  },
+);
+
 const userSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {},
+  reducers: {
+    setSortBy(state, action: PayloadAction<"name" | "email" | "username">) {
+      state.sortBy = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUsers.pending, (state) => {
@@ -53,3 +73,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
+export const { setSortBy } = userSlice.actions;
