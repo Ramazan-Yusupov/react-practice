@@ -6,7 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig(({ mode }) => {
   const isProd = mode === "production";
   return {
-    base: isProd ? "/home" : "/",
+    base: isProd ? "/react-practice" : "/",
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
