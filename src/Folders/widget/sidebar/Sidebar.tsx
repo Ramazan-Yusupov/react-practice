@@ -27,7 +27,7 @@ export function Sidebar() {
         </li>
         <li>
           <NavLink
-            to="/"
+            to="/home"
             className={({ isActive }) => (isActive ? " text-red-600" : "")}
           >
             <AiFillHome className="text-3xl" />

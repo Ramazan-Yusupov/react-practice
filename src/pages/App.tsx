@@ -13,7 +13,7 @@ export default function App() {
     <AuthProvider>
       <Layout>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/typescript" element={<TypeScriptPage />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/admin" element={<AdminPage />} />
