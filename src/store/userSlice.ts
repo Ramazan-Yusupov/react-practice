@@ -67,6 +67,20 @@ const userSlice = createSlice({
       };
       state.users.push(newUser);
     },
+    updateUser(state, action: PayloadAction<User>) {
+      const index = state.users.findIndex(
+        (user) => user.id === action.payload.id,
+      );
+      if (index !== -1) {
+        state.users[index] = action.payload;
+      }
+    },
+    restUsers(state) {
+      state.users = [];
+      state.loading = false;
+      state.error = null;
+      state.sortBy = "name";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -86,4 +100,5 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const { setSortBy, deleteUser, addUser } = userSlice.actions;
+export const { setSortBy, deleteUser, addUser, updateUser, restUsers } =
+  userSlice.actions;
