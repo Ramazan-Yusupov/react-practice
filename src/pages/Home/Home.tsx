@@ -1,5 +1,6 @@
 import { Card } from "@/shared/ui/Card";
 import { CodeBlock } from "@/shared/ui/CodeBlock";
+import { Snippets } from "./ui/Snippets";
 
 export default function Home() {
   return (
@@ -8,11 +9,12 @@ export default function Home() {
         avatar
         isOnline
         isErrorOnOff
-        maxWidth="2xl"
+        maxWidth="lg"
         title="Frontend"
-        maxHeight={600}
+        maxHeight={370}
       >
         <CodeBlock isBordered codeL="React" codeR="tsx" codeTitle="Frontend" />
+        <Snippets />
       </Card>
     </div>
   );
