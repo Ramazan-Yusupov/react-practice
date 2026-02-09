@@ -54,6 +54,19 @@ const userSlice = createSlice({
     setSortBy(state, action: PayloadAction<"name" | "email" | "username">) {
       state.sortBy = action.payload;
     },
+    deleteUser(state, action: PayloadAction<number>) {
+      state.users = state.users.filter((user) => user.id !== action.payload);
+    },
+    addUser(state, action: PayloadAction<User>) {
+      const newUser: User = {
+        ...action.payload,
+        id:
+          state.users.length > 0
+            ? Math.max(...state.users.map((u) => u.id)) + 1
+            : 1,
+      };
+      state.users.push(newUser);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -73,4 +86,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const { setSortBy } = userSlice.actions;
+export const { setSortBy, deleteUser, addUser } = userSlice.actions;

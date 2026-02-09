@@ -97,7 +97,7 @@ export function Avatar({
       </button>
 
       {showTooltip && userInfo && (
-        <div className="absolute z-1000 top-full mt-2 transform -translate-x-1 p-3 w-70 bg-black border-2 rounded-xl text-sm flex gap-3 items-center">
+        <div className="absolute z-1000 left-full mt-2 transform translate-x-2 -translate-y-18 p-3 w-70 bg-black border-2 rounded-xl text-sm flex gap-3 items-center">
           <img
             src={userInfo.avatar || ""}
             className="w-8 h-8 rounded-full border-2 border-gray-300"

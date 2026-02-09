@@ -5,12 +5,15 @@ import { StrictMode } from "react";
 import App from "./pages/App.tsx";
 import "./index.css";
 import { store } from "./store/store.ts";
+import { ThemeProvider } from "./Folders/contexts/ThemeProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter basename="/react-practice">
       <Provider store={store}>
-        <App />
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
       </Provider>
     </BrowserRouter>
   </StrictMode>,
