@@ -12,7 +12,12 @@ export default function Home() {
         title="Frontend"
         maxHeight={370}
       >
-        <CodeBlock isBordered codeL="React" codeR="tsx" codeTitle="Frontend" />
+        <CodeBlock
+          isBordered
+          codeR="tsx"
+          codeL="React"
+          codeTitle="Frontend Developer"
+        />
       </Card>
     </div>
   );
