@@ -1,6 +1,5 @@
 import { Card } from "@/shared/ui/Card";
 import { CodeBlock } from "@/shared/ui/CodeBlock";
-import { Snippets } from "./ui/Snippets";
 
 export default function Home() {
   return (
@@ -14,7 +13,6 @@ export default function Home() {
         maxHeight={370}
       >
         <CodeBlock isBordered codeL="React" codeR="tsx" codeTitle="Frontend" />
-        <Snippets />
       </Card>
     </div>
   );
