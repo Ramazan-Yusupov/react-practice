@@ -9,8 +9,8 @@ export default function Home() {
         isOnline
         isErrorOnOff
         maxWidth="lg"
-        title="Frontend"
         maxHeight={370}
+        title="Frontend"
       >
         <CodeBlock
           isBordered
