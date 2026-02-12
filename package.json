@@ -5,12 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "start": "vite preview",
     "preview": "vite preview",
-    "copy404": "cpy dist/index.html dist --rename=404.html --flat",
+    "deploy": "gh-pages -d dist",
+    "build": "tsc -b && vite build",
     "predeploy": "run-s build copy404",
-    "deploy": "gh-pages -d dist"
+    "docker-build": "docker build -t react-practice .",
+    "copy404": "cpy dist/index.html dist --rename=404.html --flat",
+    "docker-run-dev": "docker run -d 3000 --name react-container react-practice"
   },
   "dependencies": {
     "@radix-ui/react-separator": "^1.1.8",
