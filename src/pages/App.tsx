@@ -1,25 +1,15 @@
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import { Layout } from "../Layout";
+import { Home } from "./Home/Home";
+import { BlockCode } from "./BlockCode/BlockCode";
 
-import Home from "./Home/Home";
-import { Layout } from "@/layout/Layout";
-import { Settings } from "./Settings/Settings";
-import { AuthProvider } from "@/Folders/contexts/AuthContext";
-import { TypeScriptPage } from "./TypeScriptPage/TypeScriptPage";
-import { AdminPage } from "./Admin/AdminPage";
-import { UsersPage } from "./Admin/UsersPage";
-
-export default function App() {
+export function App() {
   return (
-    <AuthProvider>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/typescript" element={<TypeScriptPage />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/users" element={<UsersPage />} />
-        </Routes>
-      </Layout>
-    </AuthProvider>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/BlockCode" element={<BlockCode />} />
+      </Routes>
+    </Layout>
   );
 }
