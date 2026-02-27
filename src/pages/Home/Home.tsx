@@ -1,5 +1,5 @@
-import { Card } from "../../shared/ui/Cards/Card";
-import { CodeBlock } from "../../shared/ui/Cards/CodeBlock";
+import { Card } from "@/shared/ui/Cards/Card";
+import { CodeBlock } from "@/shared/ui/Cards/CodeBlock";
 
 export function Home() {
   return (
