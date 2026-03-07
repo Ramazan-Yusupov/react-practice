@@ -4,16 +4,13 @@ import "./index.css";
 import { App } from "./pages/App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { CountProvider } from "./context/CountContext.tsx";
-import { ThemeProvider } from "./context/ThemeContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <ThemeProvider>
-        <CountProvider>
-          <App />
-        </CountProvider>
-      </ThemeProvider>
+      <CountProvider>
+        <App />
+      </CountProvider>
     </BrowserRouter>
   </StrictMode>,
 );

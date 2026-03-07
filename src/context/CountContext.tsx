@@ -7,10 +7,10 @@ import {
 } from "react";
 
 interface CountProps {
+  count: number;
+  reset: () => void;
   increment: () => void;
   decrement: () => void;
-  reset: () => void;
-  count: number;
 }
 
 interface CountProviderProps {
@@ -43,9 +43,9 @@ export const CountProvider = ({ children }: CountProviderProps) => {
     }
   }, [count]);
 
+  const reset = useCallback(() => setCount(0), []);
   const increment = useCallback(() => setCount((prev) => prev + 1), []);
   const decrement = useCallback(() => setCount((prev) => prev - 1), []);
-  const reset = useCallback(() => setCount(0), []);
 
   const value = useMemo(
     () => ({ count, increment, decrement, reset }),
