@@ -1,5 +1,5 @@
 import { FaTrash } from "react-icons/fa6";
-import { IconButton } from "../Button/IconButton";
+import { IconButton } from "../Buttons/IconButton";
 
 interface CodeProps {
   border?: number;
@@ -10,6 +10,7 @@ interface CodeProps {
   codeL?: React.ReactNode;
   codeR?: React.ReactNode;
   codeTitle: React.ReactNode;
+  type?: "button" | "submit" | "reset";
   colorL?: "white" | "green" | "red" | "yellow";
   colorR?: "white" | "green" | "red" | "yellow";
   colorTitle?: "white" | "green" | "red" | "yellow";
@@ -23,6 +24,7 @@ export function CodeBlock({
   codeTitle,
   border = 0,
   rounded = 16,
+  type = "button",
   colorL = "green",
   colorR = "green",
   colorTitle = "white",
@@ -50,6 +52,7 @@ export function CodeBlock({
 
   return onClick ? (
     <button
+      type={type}
       onClick={onClick}
       className={`flex-between gap-10 p-3`}
       style={{

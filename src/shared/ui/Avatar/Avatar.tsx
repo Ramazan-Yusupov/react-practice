@@ -26,8 +26,6 @@ export const Avatar = ({
         <img
           src={src || ""}
           alt={alt}
-          width={35}
-          height={35}
           loading="eager"
           className="w-full h-full object-cover"
         />

@@ -1,16 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-import { Layout } from "../Layout";
 import { Home } from "./Home/Home";
 import { BlockCode } from "./BlockCode/BlockCode";
-import { ROUTES } from "@/routes";
+import { PAGES } from "@/config";
 
 export function App() {
   return (
-    <Layout>
-      <Routes>
-        <Route path={ROUTES.HOME} element={<Home />} />
-        <Route path={ROUTES.BLOCK_CODE} element={<BlockCode />} />
-      </Routes>
-    </Layout>
+    <Routes>
+      <Route path={PAGES.HOME} element={<Home />} />
+      <Route path={PAGES.BLOCKCODE} element={<BlockCode />} />
+    </Routes>
   );
 }
