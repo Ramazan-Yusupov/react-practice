@@ -1,4 +1,10 @@
-import { createContext, useMemo, useState } from "react";
+import {
+  createContext,
+  useMemo,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 
 interface CountProps {
   increment: () => void;
@@ -13,16 +19,37 @@ interface CountProviderProps {
 
 const CountContext = createContext<CountProps | undefined>(undefined);
 
-export const CountProvider = ({ children }: CountProviderProps) => {
-  const [count, setCount] = useState(0);
+const STORAGE_KEY = "counter_value";
 
-  const increment = () => setCount((prev) => prev + 1);
-  const decrement = () => setCount((prev) => prev - 1);
-  const reset = () => setCount(0);
+// Безопасное чтение из localStorage
+const getStoredCount = (): number => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : 0;
+  } catch {
+    return 0;
+  }
+};
+
+export const CountProvider = ({ children }: CountProviderProps) => {
+  const [count, setCount] = useState<number>(getStoredCount);
+
+  // Сохраняем в localStorage при изменении count
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(count));
+    } catch (error) {
+      console.warn("localStorage недоступен:", error);
+    }
+  }, [count]);
+
+  const increment = useCallback(() => setCount((prev) => prev + 1), []);
+  const decrement = useCallback(() => setCount((prev) => prev - 1), []);
+  const reset = useCallback(() => setCount(0), []);
 
   const value = useMemo(
     () => ({ count, increment, decrement, reset }),
-    [count],
+    [count, increment, decrement, reset],
   );
 
   return (
