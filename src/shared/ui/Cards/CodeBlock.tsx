@@ -2,9 +2,9 @@ import { FaTrash } from "react-icons/fa6";
 import { IconButton } from "../Buttons/IconButton";
 
 interface CodeProps {
-  border?: number;
+  border?: string;
   borderC?: string;
-  rounded?: number;
+  rounded?: string;
   onClick?: () => void;
   onDelete?: () => void;
   codeL?: React.ReactNode;
@@ -22,8 +22,8 @@ export function CodeBlock({
   onClick,
   onDelete,
   codeTitle,
-  border = 0,
-  rounded = 16,
+  border = "0px",
+  rounded = "16px",
   type = "button",
   colorL = "green",
   colorR = "green",
@@ -70,7 +70,7 @@ export function CodeBlock({
     <div
       className={`flex-between gap-10 p-3`}
       style={{
-        border: `${border}px solid ${borderC}`,
+        border: `${border} solid ${borderC}`,
         borderRadius: rounded,
       }}
     >

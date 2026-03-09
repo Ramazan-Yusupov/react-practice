@@ -1,10 +1,10 @@
 interface CardProps {
   title?: string;
-  border?: number;
+  border?: string;
   borderC?: string;
-  rounded?: number;
+  rounded?: string;
   maxWidth?: string;
-  maxHeight?: number;
+  maxHeight?: string;
   className?: string;
   children: React.ReactNode;
 }
@@ -12,8 +12,8 @@ interface CardProps {
 export function Card({
   title,
   borderC = "currentColor",
-  border = 0,
-  rounded = 16,
+  border = "0px",
+  rounded = "16px",
   children,
   maxWidth,
   maxHeight,
@@ -33,7 +33,7 @@ export function Card({
       <div
         className={`p-5 flex flex-col gap-4 ${className || ""}`}
         style={{
-          border: `${border}px solid ${borderC}`,
+          border: `${border} solid ${borderC}`,
           borderRadius: rounded,
           maxHeight: maxHeight,
         }}
