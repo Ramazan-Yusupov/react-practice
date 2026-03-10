@@ -3,7 +3,7 @@ import { IconButton } from "../Buttons/IconButton";
 
 interface CodeProps {
   border?: string;
-  borderC?: string;
+  borderColor?: string;
   rounded?: string;
   onClick?: () => void;
   onDelete?: () => void;
@@ -28,7 +28,7 @@ export function CodeBlock({
   colorL = "green",
   colorR = "green",
   colorTitle = "white",
-  borderC = "currentColor",
+  borderColor = "currentColor",
 }: CodeProps) {
   const colorsL = {
     red: "text-red-300",
@@ -56,7 +56,7 @@ export function CodeBlock({
       onClick={onClick}
       className={`flex-between gap-10 p-3`}
       style={{
-        border: `${border}px solid ${borderC}`,
+        border: `${border}px solid ${borderColor}`,
         borderRadius: rounded,
       }}
     >
@@ -70,7 +70,7 @@ export function CodeBlock({
     <div
       className={`flex-between gap-10 p-3`}
       style={{
-        border: `${border} solid ${borderC}`,
+        border: `${border} solid ${borderColor}`,
         borderRadius: rounded,
       }}
     >

@@ -1,7 +1,7 @@
 interface CardProps {
   title?: string;
   border?: string;
-  borderC?: string;
+  borderColor?: string;
   rounded?: string;
   maxWidth?: string;
   maxHeight?: string;
@@ -11,7 +11,7 @@ interface CardProps {
 
 export function Card({
   title,
-  borderC = "currentColor",
+  borderColor = "currentColor",
   border = "0px",
   rounded = "16px",
   children,
@@ -33,7 +33,7 @@ export function Card({
       <div
         className={`p-5 flex flex-col gap-4 ${className || ""}`}
         style={{
-          border: `${border} solid ${borderC}`,
+          border: `${border} solid ${borderColor}`,
           borderRadius: rounded,
           maxHeight: maxHeight,
         }}
