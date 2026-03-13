@@ -1,3 +1,4 @@
+import { cn } from "@/lib";
 import { useRef, useState } from "react";
 import { RiCloseCircleFill } from "react-icons/ri";
 
@@ -74,7 +75,7 @@ export function Input({
         value={value}
         defaultValue={defaultValue}
         onChange={handleChange}
-        className={`w-full ${inputClassName} ${className || ""}`}
+        className={cn("w-full", inputClassName, className)}
         style={{
           border: `${border}px solid ${borderColor}`,
           borderRadius: `${rounded}px`,

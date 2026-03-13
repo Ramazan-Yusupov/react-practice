@@ -1,10 +1,11 @@
-import { Card } from "@/shared/ui/Cards/Card";
-import { CodeBlock } from "@/shared/ui/Cards/CodeBlock";
+import { TodoList } from "@/shared";
+import { UseState } from "../HooksPage/UseState";
 
 export function Home() {
   return (
-    <Card border="2px" maxWidth="xl" maxHeight="360px">
-      <CodeBlock border="3px" codeTitle="Frontend Developer" codeL="tsx" />
-    </Card>
+    <div className="flex flex-col gap-5">
+      <UseState />
+      <TodoList />
+    </div>
   );
 }

@@ -1,3 +1,5 @@
+import { cn } from "@/lib";
+
 interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   className?: string;
   children: React.ReactNode;
@@ -6,7 +8,10 @@ interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
 export function Form({ className, children }: FormProps) {
   return (
     <form
-      className={`${className || ""} space-y-4 border border-white/10 p-4 text-white rounded-xl`}
+      className={cn(
+        "space-y-4 border border-white/10 p-4 text-white rounded-xl",
+        className,
+      )}
     >
       {children}
     </form>

@@ -3,13 +3,13 @@ import { IconButton } from "../Buttons/IconButton";
 
 interface CodeProps {
   border?: string;
-  borderColor?: string;
   rounded?: string;
+  borderColor?: string;
   onClick?: () => void;
   onDelete?: () => void;
+  title: React.ReactNode;
   codeL?: React.ReactNode;
   codeR?: React.ReactNode;
-  codeTitle: React.ReactNode;
   type?: "button" | "submit" | "reset";
   colorL?: "white" | "green" | "red" | "yellow";
   colorR?: "white" | "green" | "red" | "yellow";
@@ -21,7 +21,7 @@ export function CodeBlock({
   codeR,
   onClick,
   onDelete,
-  codeTitle,
+  title,
   border = "0px",
   rounded = "16px",
   type = "button",
@@ -56,14 +56,18 @@ export function CodeBlock({
       onClick={onClick}
       className={`flex-between gap-10 p-3`}
       style={{
-        border: `${border}px solid ${borderColor}`,
+        border: `${border} solid ${borderColor}`,
         borderRadius: rounded,
       }}
     >
-      <div className={`${colorsTitle[colorTitle]}`}>{codeTitle}</div>
+      <div className={`${colorsTitle[colorTitle]}`}>{title}</div>
       <div className="flex gap-3">
-        {codeL && <code className={`${colorsL[colorL]}`}>{codeL}</code>}
-        {codeR && <code className={`${colorsR[colorR]}`}>{codeR}</code>}
+        {codeL && (
+          <code className={`${colorsL[colorL]} flex-center`}>{codeL}</code>
+        )}
+        {codeR && (
+          <code className={`${colorsR[colorR]} flex-center`}>{codeR}</code>
+        )}
       </div>
     </button>
   ) : (
@@ -74,15 +78,20 @@ export function CodeBlock({
         borderRadius: rounded,
       }}
     >
-      <div className={`${colorsTitle[colorTitle]}`}>{codeTitle}</div>
+      <div className={`${colorsTitle[colorTitle]}`}>{title}</div>
 
       <div className="flex gap-3">
-        {codeL && <code className={`${colorsL[colorL]}`}>{codeL}</code>}
-        {codeR && <code className={`${colorsR[colorR]}`}>{codeR}</code>}
+        {codeL && (
+          <code className={`${colorsL[colorL]} flex-center`}>{codeL}</code>
+        )}
+        {codeR && (
+          <code className={`${colorsR[colorR]} flex-center`}>{codeR}</code>
+        )}
 
         {onDelete && (
           <IconButton
             onClick={onDelete}
+            className="h-7 px-3"
             icon={<FaTrash size={13} color="red" />}
           />
         )}

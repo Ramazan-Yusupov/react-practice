@@ -1,9 +1,11 @@
 export { Avatar } from "./ui/Avatar/Avatar";
+export { TodoList } from "./ui/TodoList/TodoList";
 export { Button } from "./ui/Buttons/Button";
 export { IconButton } from "./ui/Buttons/IconButton";
 export { Card } from "./ui/Cards/Card";
 export { CodeBlock } from "./ui/Cards/CodeBlock";
 export { Input } from "./ui/Inputs/Input";
+export { Image } from "./ui/Image/Image";
 export { Form } from "./ui/Inputs/Form";
 export { ErrorUI } from "./ui/LoadErr/ErrorUI";
 export { LoadingUI } from "./ui/LoadErr/LoadingUI";
