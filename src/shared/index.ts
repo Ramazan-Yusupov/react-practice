@@ -3,6 +3,7 @@ export { TodoList } from "./ui/TodoList/TodoList";
 export { Button } from "./ui/Buttons/Button";
 export { IconButton } from "./ui/Buttons/IconButton";
 export { Card } from "./ui/Cards/Card";
+export { Select } from "./ui/Select/Select";
 export { CodeBlock } from "./ui/Cards/CodeBlock";
 export { Input } from "./ui/Inputs/Input";
 export { Image } from "./ui/Image/Image";
