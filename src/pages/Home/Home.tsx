@@ -1,5 +1,6 @@
 import { useLocalStorage } from "@/hooks";
 import { Card, CodeBlock } from "@/shared";
+import { AnimatedList } from "@/shared/shadcn/ui/animated-list";
 
 export function Home() {
   const [click, setClick] = useLocalStorage<number>("count", 0);
@@ -15,6 +16,11 @@ export function Home() {
         codeL={`${click}`}
         onClick={handleClick}
       />
+      <AnimatedList>
+        <p>Item 1</p>
+        <p>Item 2</p>
+        <p>Item 3</p>
+      </AnimatedList>
     </Card>
   );
 }
