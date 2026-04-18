@@ -1,54 +1,61 @@
-import React from "react";
+import { cn } from "@/lib";
 
-type Option = {
+interface Option {
   value: string;
   label: string;
-};
-
-type SelectProps = {
-  options: Option[];
-  value?: string;
-  onChange?: (value: string) => void;
   disabled?: boolean;
-  className?: string;
-  name?: string;
-  placeholder?: string;
-};
+}
 
-export const Select: React.FC<SelectProps> = ({
+interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  options: Option[];
+  placeholder?: string;
+  label?: string;
+}
+
+export const Select = ({
   options,
-  value,
-  onChange,
-  disabled,
-  className = "",
-  name,
   placeholder,
-}) => {
+  label,
+  className,
+  ...props
+}: SelectProps) => {
   return (
-    <select
-      value={value}
-      onChange={(e) => onChange?.(e.target.value)}
-      disabled={disabled}
-      name={name}
-      className={`
-        border-2 rounded-xl p-2 z-10 bg-black text-white outline-none
-        ${className}
-      `}
-    >
-      {placeholder && (
-        <option value="" disabled>
-          {placeholder}
-        </option>
+    <div className="flex flex-col gap-1.5 w-full">
+      {label && (
+        <label className="text-sm text-gray-400 font-medium">{label}</label>
       )}
-      {options.map((opt) => (
-        <option
-          key={opt.value}
-          value={opt.value}
-          className="border-2 bg-black rounded-xl"
+      <div className="relative">
+        <select
+          className={cn(
+            "w-full appearance-none bg-black/50 border border-white/10 text-white",
+            "rounded-xl px-4 py-2.5 pr-8 outline-none",
+            "focus:border-blue-500 focus:ring-1 focus:ring-blue-500",
+            "transition-colors cursor-pointer",
+            className,
+          )}
+          {...props}
         >
-          {opt.label}
-        </option>
-      ))}
-    </select>
+          {placeholder && (
+            <option value="" disabled hidden>
+              {placeholder}
+            </option>
+          )}
+          {options.map((opt) => (
+            <option
+              key={opt.value}
+              value={opt.value}
+              disabled={opt.disabled}
+              className="bg-gray-900 text-white"
+            >
+              {opt.label}
+            </option>
+          ))}
+        </select>
+
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+          ▼
+        </div>
+      </div>
+    </div>
   );
 };

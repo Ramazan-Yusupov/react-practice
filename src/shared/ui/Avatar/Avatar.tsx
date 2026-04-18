@@ -1,8 +1,12 @@
+import { cn } from "@/lib";
+import { useState } from "react";
+
 interface AvatarProps {
   src?: string;
   alt?: string;
   size?: "sm" | "md" | "lg" | "xl";
   initials?: string;
+  className?: string;
 }
 
 const sizeClasses = {
@@ -17,20 +21,32 @@ export const Avatar = ({
   alt = "Avatar",
   size = "md",
   initials = "?",
+  className,
 }: AvatarProps) => {
+  const [hasError, setHasError] = useState(false);
+
+  const showImage = src && !hasError;
+
   return (
     <div
-      className={`${sizeClasses[size]} rounded-full border-2 bg-gray-300 flex items-center justify-center font-semibold text-gray-700 overflow-hidden`}
+      className={cn(
+        "rounded-full border-2 bg-gray-300 flex items-center justify-center font-semibold text-gray-700 overflow-hidden shrink-0",
+        sizeClasses[size],
+        className,
+      )}
+      aria-label={alt}
+      role="img"
     >
-      {src ? (
+      {showImage ? (
         <img
-          src={src || ""}
+          src={src}
           alt={alt}
           loading="eager"
           className="w-full h-full object-cover"
+          onError={() => setHasError(true)}
         />
       ) : (
-        <span>{initials}</span>
+        <span aria-hidden="true">{initials}</span>
       )}
     </div>
   );

@@ -1,19 +1,23 @@
 import { cn } from "@/lib";
+import { type FormHTMLAttributes, forwardRef } from "react";
 
-interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
+interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
   className?: string;
-  children: React.ReactNode;
 }
 
-export function Form({ className, children }: FormProps) {
-  return (
-    <form
-      className={cn(
-        "space-y-4 border border-white/10 p-4 text-white rounded-xl",
-        className,
-      )}
-    >
-      {children}
-    </form>
-  );
-}
+export const Form = forwardRef<HTMLFormElement, FormProps>(
+  ({ className, children, ...props }, ref) => {
+    return (
+      <form
+        ref={ref}
+        className={cn(
+          "space-y-4 border-2 border-white/50 p-4 text-white rounded-xl",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </form>
+    );
+  },
+);

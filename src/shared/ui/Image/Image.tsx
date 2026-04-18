@@ -1,41 +1,24 @@
 import { cn } from "@/lib";
+import { type ImgHTMLAttributes, forwardRef } from "react";
 
-interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-  src: string;
-  alt?: string;
-  size?: string;
-  border?: string;
-  rounded?: string;
-  className?: string;
-  borderColor?: string;
-  width?: number | string;
-  height?: number | string;
+interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
+  containerClassName?: string;
 }
 
-export function Image({
-  src,
-  alt,
-  size,
-  width,
-  height,
-  border,
-  rounded,
-  className,
-  borderColor = "currentColor",
-  ...rest
-}: ImageProps) {
-  return (
-    <img
-      src={src}
-      alt={alt}
-      width={size || width}
-      height={size || height}
-      className={cn(className)}
-      {...rest}
-      style={{
-        border: `${border} solid ${borderColor}`,
-        borderRadius: rounded,
-      }}
-    />
-  );
-}
+export const Image = forwardRef<HTMLImageElement, ImageProps>(
+  ({ className, containerClassName, alt = "", ...props }, ref) => {
+    return (
+      <div className={cn("overflow-hidden", containerClassName)}>
+        <img
+          ref={ref}
+          alt={alt}
+          className={cn(
+            "w-full h-full object-cover transition-transform hover:scale-105",
+            className,
+          )}
+          {...props}
+        />
+      </div>
+    );
+  },
+);

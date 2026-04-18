@@ -90,6 +90,7 @@ export function CodeBlock({
 
         {onDelete && (
           <IconButton
+            ariaLabel="Delete"
             onClick={onDelete}
             className="h-7 px-3"
             icon={<FaTrash size={13} color="red" />}

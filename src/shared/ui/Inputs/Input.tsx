@@ -1,98 +1,89 @@
 import { cn } from "@/lib";
-import { useRef, useState } from "react";
+import { type InputHTMLAttributes, forwardRef } from "react";
 import { RiCloseCircleFill } from "react-icons/ri";
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  ref?: React.Ref<HTMLInputElement>;
-  border?: number;
-  rounded?: number;
-  className?: string;
-  borderColor?: string;
-  isCloseIcon?: boolean;
+interface CustomInputProps {
+  iconLeft?: React.ReactNode;
+  iconRight?: React.ReactNode;
+  error?: string;
   onClear?: () => void;
 }
 
-const classTypeInput = "px-4 py-2 placeholder:text-gray-400 outline-none";
-const classTypeRange = "w-full cursor-pointer";
-const classTypeCheckbox = "w-5 h-5 cursor-pointer accent-blue-500";
+export interface InputProps
+  extends InputHTMLAttributes<HTMLInputElement>, CustomInputProps {}
 
-export function Input({
-  type = "text",
-  className,
-  border = 2,
-  rounded = 10,
-  borderColor = "#ffffff",
-  isCloseIcon = false,
-  onClear,
-  onChange,
-  value,
-  defaultValue,
-  ...props
-}: InputProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const isControlled = value !== undefined;
-  const [uncontrolledValue, setUncontrolledValue] = useState(() =>
-    String(defaultValue ?? ""),
-  );
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      className,
+      type = "text",
+      iconLeft,
+      iconRight,
+      error,
+      onClear,
+      onChange,
+      value,
+      ...props
+    },
+    ref,
+  ) => {
+    const hasValue =
+      value !== undefined && value !== null && String(value).length > 0;
 
-  const currentValue = isControlled ? String(value ?? "") : uncontrolledValue;
+    const isClearable =
+      !!onClear && hasValue && type !== "checkbox" && type !== "range";
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isControlled) {
-      setUncontrolledValue(event.target.value);
-    }
+    return (
+      <div className="relative w-full group">
+        <div className="relative flex items-center w-full">
+          {iconLeft && (
+            <span className="absolute left-3 text-gray-400 pointer-events-none z-10">
+              {iconLeft}
+            </span>
+          )}
 
-    onChange?.(event);
-  };
+          <input
+            ref={ref}
+            type={type}
+            value={value}
+            onChange={onChange}
+            {...props}
+            className={cn(
+              "w-full bg-transparent text-white placeholder:text-gray-500 outline-none transition-all",
+              "border-2 rounded-xl px-4 py-2.5",
+              "focus:border-slate-500 focus:ring-2 focus:ring-blue-500/20",
+              error
+                ? "border-red-500 focus:ring-red-500/20"
+                : "border-white/10",
+              iconLeft && "pl-10",
+              (iconRight || isClearable) && "pr-10",
+              type === "range" && "p-0 h-2 accent-slate-500",
+              type === "checkbox" && "w-5 h-5 accent-slate-500 cursor-pointer",
+              className,
+            )}
+          />
 
-  const handleClear = () => {
-    if (isControlled) {
-      onClear?.();
-      inputRef.current?.focus();
-      return;
-    }
+          {isClearable && onClear && (
+            <button
+              type="button"
+              onClick={onClear}
+              className="absolute right-3 text-gray-400 hover:text-white transition-colors z-10"
+              aria-label="Clear input"
+            >
+              <RiCloseCircleFill size={18} />
+            </button>
+          )}
 
-    setUncontrolledValue("");
-    if (inputRef.current) {
-      inputRef.current.value = "";
-      inputRef.current.focus();
-    }
-    onClear?.();
-  };
-
-  const inputClassName =
-    type === "range"
-      ? classTypeRange
-      : type === "checkbox"
-        ? classTypeCheckbox
-        : classTypeInput;
-
-  return (
-    <div className="relative w-full">
-      <input
-        {...props}
-        ref={inputRef}
-        type={type}
-        value={value}
-        defaultValue={defaultValue}
-        onChange={handleChange}
-        className={cn("w-full", inputClassName, className)}
-        style={{
-          border: `${border}px solid ${borderColor}`,
-          borderRadius: `${rounded}px`,
-        }}
-      />
-
-      {isCloseIcon && type !== "checkbox" && currentValue.length > 0 && (
-        <button
-          type="button"
-          aria-label="Clear input"
-          onClick={handleClear}
-          className="absolute right-3 top-1/2 -translate-y-1/2"
-        >
-          <RiCloseCircleFill className="cursor-pointer" />
-        </button>
-      )}
-    </div>
-  );
-}
+          {!isClearable && iconRight && (
+            <span className="absolute right-3 text-gray-400 z-10">
+              {iconRight}
+            </span>
+          )}
+        </div>
+        {error && (
+          <span className="text-xs text-red-400 mt-1 ml-1 block">{error}</span>
+        )}
+      </div>
+    );
+  },
+);
