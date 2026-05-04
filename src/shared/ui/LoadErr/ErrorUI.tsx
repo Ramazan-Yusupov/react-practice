@@ -1,6 +1,6 @@
 interface ErrorProps {
   text?: string;
-  isError: string | boolean;
+  isError?: string | boolean;
 }
 
 export function ErrorUI({ isError, text = "Error" }: ErrorProps) {

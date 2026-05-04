@@ -1,6 +1,6 @@
 interface LoadingUIProps {
   text?: string;
-  isLoading: boolean;
+  isLoading?: boolean;
   fullScreen?: boolean;
 }
 

@@ -2,6 +2,7 @@
 export { Avatar } from "./ui/Avatar/Avatar";
 export { Select } from "./ui/Select/Select";
 export { Image } from "./ui/Image/Image";
+export { PostsList } from "./ui/ApiUI/PostsList";
 
 /* Input Components */
 export { Form } from "./ui/Inputs/Form";

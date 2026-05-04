@@ -50,7 +50,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(baseStyles, variants[variant], sizes[size], className)}
         {...props}
       >
-        {isLoading && <LoadingUI isLoading />}
+        {isLoading && <LoadingUI />}
         {title || children}
       </button>
     );

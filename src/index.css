@@ -9,26 +9,26 @@ button {
   cursor: pointer;
 }
 
+code {
+  @apply text-xs px-2 py-1 rounded-md bg-slate-800;
+}
+
 .scrollHidden::-webkit-scrollbar {
   display: none;
 }
 
-.space-border {
+@utility space-border {
   @apply space-y-4 border-b-4 border-gray-600 pb-4;
 }
-.flex-between {
+@utility flex-between {
   @apply flex justify-between w-full items-center;
 }
 
-.flex-center {
+@utility flex-center {
   @apply flex items-center justify-center;
 }
-.flex-col-center {
+@utility flex-col-center {
   @apply flex flex-col items-center justify-center;
-}
-
-code {
-  @apply text-xs px-2 py-1 rounded-md bg-slate-800;
 }
 
 :root {
