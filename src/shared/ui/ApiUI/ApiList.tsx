@@ -4,7 +4,7 @@ import { CodeBlock } from "../Cards/CodeBlock";
 import { LoadingUI } from "../LoadErr/LoadingUI";
 import { ErrorUI } from "../LoadErr/ErrorUI";
 
-export function PostsList() {
+export function ApiList() {
   const { data, error, isLoading } = useGetPostsQuery();
 
   if (isLoading) return <LoadingUI />;

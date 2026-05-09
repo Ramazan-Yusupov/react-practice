@@ -12,6 +12,7 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(
         <img
           ref={ref}
           alt={alt}
+          sizes="auto"
           className={cn(
             "w-full h-full object-cover transition-transform hover:scale-105",
             className,
