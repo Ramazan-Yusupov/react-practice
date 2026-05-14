@@ -6,7 +6,7 @@ export function Home() {
       <CodeBlock
         border="1px"
         title="Hello World"
-        codeL="console.log('Hello World')"
+        codeL="console.log('Frontend')"
       />
     </Card>
   );
