@@ -5,6 +5,7 @@ import { LoadingUI } from "../LoadErr/LoadingUI";
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "danger" | "outline" | "ghost";
   title?: string;
+  icon?: React.ReactNode;
   size?: "sm" | "md" | "lg";
   isLoading?: boolean;
 }
@@ -17,23 +18,25 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       size = "md",
       className,
       title,
-      disabled,
+      icon,
       isLoading,
       ...props
     },
     ref,
   ) => {
     const baseStyles =
-      "font-semibold rounded-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed";
+      "font-semibold rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed!";
 
     const variants = {
       primary:
-        "bg-blue-500 hover:bg-blue-600 text-white shadow-md hover:shadow-lg",
-      secondary: "bg-gray-300 hover:bg-gray-400 text-gray-900",
-      danger: "bg-red-500 hover:bg-red-600 text-white",
+        "bg-blue-500 hover:bg-blue-600 text-white shadow-md disabled:hover:bg-blue-500",
+      secondary:
+        "bg-gray-300 hover:bg-gray-400 text-gray-900 disabled:hover:bg-gray-300",
+      danger:
+        "bg-red-500 hover:bg-red-600 text-white disabled:hover:bg-red-500",
       outline:
-        "border-2 hover:border-white/50 border-white text-white bg-transparent",
-      ghost: "hover:bg-white/10 text-white",
+        "border-2 hover:border-white/50 border-white text-white bg-transparent disabled:border-gray-600 ",
+      ghost: "hover:bg-white/10 text-white disabled:bg-white/10",
     };
 
     const sizes = {
@@ -46,12 +49,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         type="button"
-        disabled={disabled || isLoading}
+        disabled={isLoading}
         className={cn(baseStyles, variants[variant], sizes[size], className)}
         {...props}
       >
         {isLoading && <LoadingUI />}
-        {title || children}
+        {title || children || icon}
       </button>
     );
   },
