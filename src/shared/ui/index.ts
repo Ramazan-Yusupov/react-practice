@@ -3,6 +3,8 @@ export { Avatar } from "./Avatar/Avatar";
 export { Select } from "./Select/Select";
 export { Image } from "./Image/Image";
 export { ApiList } from "./ApiUI/ApiList";
+export { Badge } from "./Badge/Badge";
+export { CardStyles } from "./Cards/CardStyles";
 
 /* Input Components */
 export { Form } from "./Inputs/Form";

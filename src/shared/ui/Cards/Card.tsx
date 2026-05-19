@@ -1,36 +1,25 @@
 import { cn } from "@/lib";
-import { Button } from "../Buttons/Button";
-import { Input } from "../Inputs/Input";
+import { Badge } from "../Badge/Badge";
 
 interface CardProps {
   title?: string;
-  value?: string;
   border?: string;
   rounded?: string;
-  isInput?: boolean;
-  isBtnAdd?: boolean;
   maxWidth?: string;
   maxHeight?: string;
   className?: string;
   borderColor?: string;
   children: React.ReactNode;
-  onClick?: () => void;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export function Card({
   title,
-  value,
-  onClick,
   children,
   maxWidth,
-  onChange,
   maxHeight,
   className,
   border = "0px",
   rounded = "16px",
-  isInput = false,
-  isBtnAdd = false,
   borderColor = "currentColor",
 }: CardProps) {
   const maxWidthClass: { [key: string]: string } = {
@@ -43,7 +32,6 @@ export function Card({
 
   return (
     <div className={`${maxWidth ? `${maxWidthClass[maxWidth]}` : ""}`}>
-      {title && <h2 className="text-2xl font-bold mb-4">{title}</h2>}
       <div
         className={cn("flex flex-col gap-4 p-5", className)}
         style={{
@@ -52,20 +40,7 @@ export function Card({
           maxHeight: maxHeight,
         }}
       >
-        {(isInput || isBtnAdd) && (
-          <div className="flex justify-end gap-2 sticky z-10 bg-black">
-            {isInput && (
-              <div className="w-full">
-                <Input
-                  value={value}
-                  onChange={onChange}
-                  placeholder="Search..."
-                />
-              </div>
-            )}
-            {isBtnAdd && <Button title="Add" onClick={onClick} />}
-          </div>
-        )}
+        {title && <Badge text={title} />}
         <div className="flex flex-col gap-4 overflow-hidden overflow-y-auto scrollHidden">
           {children}
         </div>

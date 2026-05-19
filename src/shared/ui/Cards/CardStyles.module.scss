@@ -1,0 +1,26 @@
+@use "variables" as v;
+@use "mixins" as m;
+
+.card {
+  border: 2px solid v.$primary-color;
+  border-radius: v.$border-radius;
+  max-height: 80vh;
+  padding: 10px;
+  transition: color v.$transition-speed ease-in-out;
+
+  .title {
+    color: white;
+
+    &:hover {
+      color: #9a476f;
+    }
+  }
+
+  .text {
+    @include m.flex-center;
+  }
+
+  &--active {
+    border-color: green;
+  }
+}
