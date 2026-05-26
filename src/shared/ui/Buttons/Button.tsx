@@ -25,7 +25,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     const baseStyles =
-      "font-semibold rounded-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed!";
+      "font-semibold rounded-lg transition-all flex items-center justify-center gap-2 outline-none whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed!";
 
     const variants = {
       primary:
