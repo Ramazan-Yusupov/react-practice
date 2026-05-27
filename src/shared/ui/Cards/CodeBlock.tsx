@@ -24,7 +24,6 @@ export function CodeBlock({
   title,
   border = "0px",
   rounded = "16px",
-  type = "button",
   colorL = "green",
   colorR = "green",
   colorTitle = "white",
@@ -36,6 +35,7 @@ export function CodeBlock({
     green: "text-green-300",
     yellow: "text-yellow-300",
   };
+
   const colorsR = {
     red: "text-red-300",
     white: "text-white",
@@ -50,35 +50,28 @@ export function CodeBlock({
     yellow: "text-yellow-300",
   };
 
-  return onClick ? (
-    <button
-      type={type}
-      onClick={onClick}
-      className={`flex-between gap-10 p-3`}
-      style={{
-        border: `${border} solid ${borderColor}`,
-        borderRadius: rounded,
-      }}
-    >
-      <div className={`${colorsTitle[colorTitle]}`}>{title}</div>
-      <div className="flex gap-3">
-        {codeL && (
-          <code className={`${colorsL[colorL]} flex-center`}>{codeL}</code>
-        )}
-        {codeR && (
-          <code className={`${colorsR[colorR]} flex-center`}>{codeR}</code>
-        )}
-      </div>
-    </button>
-  ) : (
+  return (
     <div
-      className={`flex-between gap-10 p-3`}
+      onClick={onClick}
+      className={`flex-between gap-10 p-3 ${onClick ? "cursor-pointer outline-none" : ""}`}
       style={{
         border: `${border} solid ${borderColor}`,
         borderRadius: rounded,
       }}
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={
+        onClick
+          ? (event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                onClick();
+              }
+            }
+          : undefined
+      }
     >
-      <div className={`${colorsTitle[colorTitle]}`}>{title}</div>
+      <div className={colorsTitle[colorTitle]}>{title}</div>
 
       <div className="flex gap-3">
         {codeL && (
@@ -91,7 +84,10 @@ export function CodeBlock({
         {onDelete && (
           <IconButton
             ariaLabel="Delete"
-            onClick={onDelete}
+            onClick={(event) => {
+              event.stopPropagation();
+              onDelete();
+            }}
             className="h-7 px-3"
             icon={<FaTrash size={13} color="red" />}
           />

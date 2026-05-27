@@ -1,5 +1,5 @@
 type BadgeProps = {
-  text: string;
+  text?: string;
   count?: number;
 };
 
