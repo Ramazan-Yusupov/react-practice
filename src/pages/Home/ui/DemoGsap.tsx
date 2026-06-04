@@ -36,7 +36,7 @@ export function DemoGsap() {
   return (
     <Box ref={root} className="relative flex flex-col gap-10">
       <Box
-        size={120}
+        size={130}
         text="fromTo()"
         className="sceneTo1"
         background="#014422"
