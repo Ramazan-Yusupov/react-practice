@@ -1,5 +1,6 @@
 /* Other Components */
 export { Avatar } from "./Avatar/Avatar";
+export { Box } from "./Box/Box";
 export { Select } from "./Select/Select";
 export { Image } from "./Image/Image";
 export { Badge } from "./Badge/Badge";

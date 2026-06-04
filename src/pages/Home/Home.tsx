@@ -1,9 +1,9 @@
-import { Button, Card } from "@/shared/ui";
+import { DemoGsap } from "./ui/DemoGsap";
 
 export function Home() {
   return (
-    <Card title="Todo" maxWidth="2xl" maxHeight="500px" border="2px">
-      <Button title="Button" />
-    </Card>
+    <div className="flex justify-start">
+      <DemoGsap />
+    </div>
   );
 }
