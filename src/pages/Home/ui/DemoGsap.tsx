@@ -13,7 +13,7 @@ export function DemoGsap() {
       gsap.fromTo(
         ".sceneTo1",
         {
-          duration: 2,
+          duration: 1.5,
           borderRadius: "0px",
           backgroundColor: "#014422",
           ease: "power1.out",
