@@ -1,44 +1,36 @@
-import type {
-  CSSProperties,
-  ComponentPropsWithoutRef,
-  ElementType,
-  ReactNode,
-} from "react";
-import { cn } from "@/lib";
+import type { CSSProperties, ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
+import { cn } from '@/lib';
 
-type BoxProps<T extends ElementType = "div"> = {
+type BoxProps<T extends ElementType = 'div'> = {
   as?: T;
   text?: ReactNode;
   border?: string;
   ref?: React.Ref<HTMLDivElement>;
   rounded?: string;
   borderColor?: string;
-  color?: CSSProperties["color"];
-  background?: CSSProperties["background"];
+  color?: CSSProperties['color'];
+  background?: CSSProperties['background'];
   className?: string;
-  width?: CSSProperties["width"];
-  height?: CSSProperties["height"];
-  minWidth?: CSSProperties["minWidth"];
-  minHeight?: CSSProperties["minHeight"];
-  maxWidth?: CSSProperties["maxWidth"];
-  maxHeight?: CSSProperties["maxHeight"];
-  size?: CSSProperties["width"];
-  display?: CSSProperties["display"];
-  position?: CSSProperties["position"];
-  top?: CSSProperties["top"];
-  right?: CSSProperties["right"];
-  bottom?: CSSProperties["bottom"];
-  left?: CSSProperties["left"];
-  padding?: CSSProperties["padding"];
-  margin?: CSSProperties["margin"];
+  width?: CSSProperties['width'];
+  height?: CSSProperties['height'];
+  minWidth?: CSSProperties['minWidth'];
+  minHeight?: CSSProperties['minHeight'];
+  maxWidth?: CSSProperties['maxWidth'];
+  maxHeight?: CSSProperties['maxHeight'];
+  size?: CSSProperties['width'];
+  display?: CSSProperties['display'];
+  position?: CSSProperties['position'];
+  top?: CSSProperties['top'];
+  right?: CSSProperties['right'];
+  bottom?: CSSProperties['bottom'];
+  left?: CSSProperties['left'];
+  padding?: CSSProperties['padding'];
+  margin?: CSSProperties['margin'];
   style?: CSSProperties;
   children?: ReactNode;
-} & Omit<
-  ComponentPropsWithoutRef<T>,
-  "as" | "color" | "children" | "style" | "className"
->;
+} & Omit<ComponentPropsWithoutRef<T>, 'as' | 'color' | 'children' | 'style' | 'className'>;
 
-export function Box<T extends ElementType = "div">({
+export function Box<T extends ElementType = 'div'>({
   as,
   text,
   size,
@@ -54,7 +46,7 @@ export function Box<T extends ElementType = "div">({
   className,
   borderColor,
   background,
-  color = "white",
+  color = 'white',
   display,
   position,
   top,
@@ -64,10 +56,10 @@ export function Box<T extends ElementType = "div">({
   padding,
   margin,
   style,
-  rounded = "16px",
+  rounded = '16px',
   ...props
 }: BoxProps<T>) {
-  const Component = as || "div";
+  const Component = as || 'div';
   const boxStyle: CSSProperties = {
     width: size ?? width,
     height: size ?? height,
@@ -91,12 +83,7 @@ export function Box<T extends ElementType = "div">({
   };
 
   return (
-    <Component
-      ref={ref}
-      className={cn("flex-center", className)}
-      style={boxStyle}
-      {...props}
-    >
+    <Component ref={ref} className={cn('flex-center', className)} style={boxStyle} {...props}>
       {text || children}
     </Component>
   );

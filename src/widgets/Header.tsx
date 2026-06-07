@@ -1,6 +1,6 @@
-import { Avatar } from "../shared/ui/Avatar/Avatar";
-import { MENU } from "./ui/menu";
-import { MenuBar } from "./ui/MenuBar";
+import { Avatar } from '../shared/ui/Avatar/Avatar';
+import { MENU } from './ui/menu';
+import { MenuBar } from './ui/MenuBar';
 
 export function Header() {
   return (

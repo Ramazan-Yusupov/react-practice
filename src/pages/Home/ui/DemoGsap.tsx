@@ -1,7 +1,7 @@
-import { Box } from "@/shared/ui";
-import { useRef } from "react";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
+import { Box } from '@/shared/ui';
+import { useRef } from 'react';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(useGSAP);
 
@@ -11,15 +11,15 @@ export function DemoGsap() {
   useGSAP(
     () => {
       gsap.fromTo(
-        ".sceneTo1",
+        '.sceneTo1',
         {
           width: 130,
           repeat: -1,
           yoyo: true,
           duration: 1.5,
           repeatDelay: 0.5,
-          ease: "power1.out",
-          backgroundColor: "#014422",
+          ease: 'power1.out',
+          backgroundColor: '#014422',
         },
         {
           width: 300,
@@ -27,8 +27,8 @@ export function DemoGsap() {
           yoyo: true,
           duration: 2,
           repeatDelay: 0.5,
-          ease: "power1.out",
-          backgroundColor: "#090f86",
+          ease: 'power1.out',
+          backgroundColor: '#090f86',
         },
       );
     },

@@ -1,1 +1,1 @@
-export { useCustomHook } from "./useCustomHook";
+export { useCustomHook } from './useCustomHook';

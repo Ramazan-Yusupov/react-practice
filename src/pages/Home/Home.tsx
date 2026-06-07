@@ -1,4 +1,4 @@
-import { DemoGsap } from "./ui/DemoGsap";
+import { DemoGsap } from './ui/DemoGsap';
 
 export function Home() {
   return (

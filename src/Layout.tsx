@@ -1,4 +1,4 @@
-import { Header } from "./widgets";
+import { Header } from './widgets';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (

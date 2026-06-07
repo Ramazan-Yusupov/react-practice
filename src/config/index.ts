@@ -1,1 +1,1 @@
-export { PAGES } from "./pages.config";
+export { PAGES } from './pages.config';

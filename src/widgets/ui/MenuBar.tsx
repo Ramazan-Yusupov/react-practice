@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
-import type { IMenuBar } from "./menu";
+import { NavLink } from 'react-router-dom';
+import type { IMenuBar } from './menu';
 
 interface MenuBarProps {
   menuBar: IMenuBar;
@@ -11,9 +11,7 @@ export function MenuBar({ menuBar, className }: MenuBarProps) {
     <NavLink
       to={menuBar.href}
       aria-label={menuBar.title}
-      className={({ isActive }) =>
-        `${isActive ? "text-red-500" : ""} ${className || ""}`
-      }
+      className={({ isActive }) => `${isActive ? 'text-red-500' : ''} ${className || ''}`}
     >
       {menuBar.icon}
     </NavLink>

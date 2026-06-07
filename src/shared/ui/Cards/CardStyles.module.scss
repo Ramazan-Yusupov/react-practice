@@ -1,5 +1,5 @@
-@use "variables" as v;
-@use "mixins" as m;
+@use 'variables' as v;
+@use 'mixins' as m;
 
 .card {
   border: 2px solid v.$primary-color;
