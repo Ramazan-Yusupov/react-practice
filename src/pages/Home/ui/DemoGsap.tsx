@@ -13,20 +13,22 @@ export function DemoGsap() {
       gsap.fromTo(
         ".sceneTo1",
         {
-          duration: 1.5,
-          borderRadius: "0px",
-          backgroundColor: "#014422",
-          ease: "power1.out",
+          width: 130,
           repeat: -1,
           yoyo: true,
+          duration: 1.5,
+          repeatDelay: 0.5,
+          ease: "power1.out",
+          backgroundColor: "#014422",
         },
         {
-          duration: 2,
-          borderRadius: "24px",
-          backgroundColor: "#090f86",
-          ease: "power1.out",
+          width: 300,
           repeat: -1,
           yoyo: true,
+          duration: 2,
+          repeatDelay: 0.5,
+          ease: "power1.out",
+          backgroundColor: "#090f86",
         },
       );
     },
@@ -35,12 +37,7 @@ export function DemoGsap() {
 
   return (
     <Box ref={root} className="relative flex flex-col gap-10">
-      <Box
-        size={130}
-        text="fromTo()"
-        className="sceneTo1"
-        background="#014422"
-      />
+      <Box size={130} text="fromTo()" className="sceneTo1" />
     </Box>
   );
 }
