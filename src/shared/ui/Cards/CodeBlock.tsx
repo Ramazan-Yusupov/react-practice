@@ -1,10 +1,12 @@
 import { FaTrash } from 'react-icons/fa6';
 import { Button } from '../Buttons/Button';
+import { Badge } from '../Badge/Badge';
 
 type CodeBlockColor = 'white' | 'green' | 'red' | 'yellow';
 type ButtonType = 'button' | 'submit' | 'reset';
 
 interface CodeProps {
+  badge?: string | number;
   border?: string;
   rounded?: string;
   borderColor?: string;
@@ -12,7 +14,7 @@ interface CodeProps {
   onClick?: () => void;
   onDelete?: () => void;
   type?: ButtonType;
-  title: React.ReactNode;
+  title?: React.ReactNode;
   codeL?: React.ReactNode;
   codeR?: React.ReactNode;
   colorL?: CodeBlockColor;
@@ -39,6 +41,7 @@ export function CodeBlock({
   title,
   codeL,
   codeR,
+  badge,
   onEdit,
   onClick,
   onDelete,
@@ -74,7 +77,10 @@ export function CodeBlock({
           : undefined
       }
     >
-      <div className={colorClasses[colorTitle]}>{title}</div>
+      <div className="flex items-center gap-2">
+        {title && <div className={colorClasses[colorTitle]}>{title}</div>}
+        {badge && <Badge text={badge} />}
+      </div>
 
       <div className="flex items-center gap-3">
         {leftValue !== null && (

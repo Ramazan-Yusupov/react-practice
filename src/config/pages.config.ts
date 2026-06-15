@@ -1,4 +1,4 @@
 export const PAGES = {
   HOME: '/',
-  BLOCKCODE: '/BlockCode',
+  ZUSTAND: '/Zustand',
 };

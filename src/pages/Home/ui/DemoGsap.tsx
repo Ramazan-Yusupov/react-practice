@@ -1,43 +1,33 @@
+import { useGSAP } from '@gsap/react';
 import { Box } from '@/shared/ui';
 import { useRef } from 'react';
 import { gsap } from 'gsap';
-import { useGSAP } from '@gsap/react';
+import { createBoxItem } from '@/shared/utils/utils';
+import { useGsap } from '@/hooks/useGsap';
 
 gsap.registerPlugin(useGSAP);
 
 export function DemoGsap() {
   const root = useRef<HTMLDivElement | null>(null);
 
-  useGSAP(
-    () => {
-      gsap.fromTo(
-        '.sceneTo1',
-        {
-          width: 130,
-          repeat: -1,
-          yoyo: true,
-          duration: 1.5,
-          repeatDelay: 0.5,
-          ease: 'power1.out',
-          backgroundColor: '#014422',
-        },
-        {
-          width: 300,
-          repeat: -1,
-          yoyo: true,
-          duration: 2,
-          repeatDelay: 0.5,
-          ease: 'power1.out',
-          backgroundColor: '#090f86',
-        },
-      );
-    },
-    { scope: root },
-  );
+  useGsap({
+    root,
+    selector: '.scene',
+  });
+
+  const boxes = Array.from({ length: 9 }, (_, index) => createBoxItem(index + 1));
 
   return (
-    <Box ref={root} className="relative flex flex-col gap-10">
-      <Box size={130} text="fromTo()" className="sceneTo1" />
+    <Box ref={root} className="grid grid-cols-3 gap-10">
+      {boxes.map((item) => (
+        <Box
+          size={150}
+          key={item.id}
+          text={item.text}
+          className="scene"
+          background={item.background}
+        />
+      ))}
     </Box>
   );
 }
