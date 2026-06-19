@@ -13,7 +13,7 @@ export function Gsap() {
   const boxes = Array.from({ length: 1 }, (_, index) => createBoxItem(index + 1));
 
   return (
-    <Box ref={root} className="flex flex-col justify-start gap-10">
+    <Box ref={root} className="flex flex-col items-start gap-10 ms-50">
       {boxes.map((item) => (
         <Box
           size={150}
