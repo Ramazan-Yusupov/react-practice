@@ -1,4 +1,4 @@
-import { Avatar } from '../shared/ui/Avatar/Avatar';
+import { Avatar } from '../shared/ui';
 import { MENU } from './ui/menu';
 import { MenuBar } from './ui/MenuBar';
 
