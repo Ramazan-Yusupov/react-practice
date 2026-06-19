@@ -1,5 +1,5 @@
-import { PAGES } from '../../config/pages.config';
-import { AiFillApi, AiFillHome } from 'react-icons/ai';
+import { PAGES } from '../../shared/config/pages.config';
+import { AiFillHome } from 'react-icons/ai';
 
 export interface IMenuBar {
   href: string;
@@ -9,13 +9,8 @@ export interface IMenuBar {
 
 export const MENU = [
   {
-    title: 'Home',
-    href: PAGES.HOME,
+    title: 'Gsap',
+    href: PAGES.GSAP,
     icon: <AiFillHome size={22} />,
-  },
-  {
-    title: 'Zustand',
-    href: PAGES.ZUSTAND,
-    icon: <AiFillApi size={22} />,
   },
 ];

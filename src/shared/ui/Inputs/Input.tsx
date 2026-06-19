@@ -1,4 +1,4 @@
-import { cn } from '@/lib';
+import { cn } from '@/shared/lib';
 import { type InputHTMLAttributes, forwardRef } from 'react';
 import { RiCloseCircleFill } from 'react-icons/ri';
 

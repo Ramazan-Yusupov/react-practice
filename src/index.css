@@ -27,6 +27,12 @@ code {
 @utility flex-center {
   @apply flex items-center justify-center;
 }
+@utility flex-start {
+  @apply flex items-center justify-start;
+}
+@utility flex-end {
+  @apply flex items-center justify-end;
+}
 @utility flex-col-center {
   @apply flex flex-col items-center justify-center;
 }

@@ -1,5 +1,5 @@
 import type { CSSProperties, ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
-import { cn } from '@/lib';
+import { cn } from '@/shared/lib';
 
 type BoxProps<T extends ElementType = 'div'> = {
   as?: T;

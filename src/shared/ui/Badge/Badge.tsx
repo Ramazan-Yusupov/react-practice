@@ -1,4 +1,4 @@
-import { cn } from '@/lib';
+import { cn } from '@/shared/lib';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
 type colors = 'gray' | 'white' | 'red' | 'green' | 'blue' | 'yellow';

@@ -1,4 +1,4 @@
-import { cn } from '@/lib';
+import { cn } from '@/shared/lib';
 import { type FormHTMLAttributes, forwardRef } from 'react';
 
 interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
