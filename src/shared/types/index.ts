@@ -1,1 +1,1 @@
-export type { BoxItem } from './types';
+export type { BoxItem, AnimationConfig, GsapMethod, UseGsapParams } from './types';

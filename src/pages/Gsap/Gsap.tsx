@@ -10,25 +10,17 @@ export function Gsap() {
     animations: ANIMATIONS_CONFIG,
   });
 
-  const boxes = Array.from({ length: 1 }, (_, index) => createBoxItem(index + 1));
+  const boxes = Array.from({ length: 6 }, (_, index) => createBoxItem(index + 1));
 
   return (
     <Box ref={root} className="flex flex-col items-start gap-10 ms-50">
       {boxes.map((item) => (
         <Box
-          size={150}
+          width={300}
+          height={50}
           key={item.id}
           text={item.text}
           className="scene"
-          background={item.background}
-        />
-      ))}
-      {boxes.map((item) => (
-        <Box
-          size={150}
-          key={item.id}
-          text={item.text}
-          className="scene2"
           background={item.background}
         />
       ))}
