@@ -431,7 +431,7 @@ export function LocalCodeNotebook() {
                   </span>
                 </div>
 
-                <div className="max-h-[610px] overflow-auto bg-[#090909] p-0">
+                <div className="max-h-152.5 overflow-auto bg-[#090909] p-0">
                   <pre className="min-w-max py-4 text-xs leading-6 text-white/75">
                     {displayedLines.map((line) => (
                       <code
@@ -453,7 +453,7 @@ export function LocalCodeNotebook() {
                 </div>
               </>
             ) : (
-              <div className="grid min-h-[460px] place-items-center p-6">
+              <div className="grid min-h-115 place-items-center p-6">
                 <EmptyState
                   icon={<FiCode size={31} />}
                   text="Открой файл, чтобы увидеть нумерованный preview и мини-анализ."
