@@ -287,7 +287,7 @@ export function FocusDeck() {
                   className={`w-full rounded-2xl border p-4 text-left transition ${
                     isActive
                       ? 'border-blue-300/45 bg-blue-300/10 shadow-lg shadow-blue-500/5'
-                      : 'border-transparent bg-black/20 hover:border-white/15 hover:bg-white/[0.04]'
+                      : 'border-transparent bg-black/20 hover:border-white/15 hover:bg-white/4'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3">
@@ -437,7 +437,7 @@ export function FocusDeck() {
                 </p>
               </div>
 
-              <div className="max-h-[430px] space-y-3 overflow-auto p-4">
+              <div className="max-h-107.5 space-y-3 overflow-auto p-4">
                 {taskSessions.length ? (
                   taskSessions.map((session) => (
                     <article

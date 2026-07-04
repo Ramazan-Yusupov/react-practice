@@ -358,7 +358,9 @@ export function AsyncInbox() {
                           </span>
                         </div>
 
-                        <p className="break-words text-sm leading-6 text-white/90">{task.text}</p>
+                        <p className="wrap-break-word text-sm leading-6 text-white/90">
+                          {task.text}
+                        </p>
 
                         <p className="mt-3 text-xs text-white/40">
                           {formatTime(task.createdAt)} · попытка {task.attempts}
