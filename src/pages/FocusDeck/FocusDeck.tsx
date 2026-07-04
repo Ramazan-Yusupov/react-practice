@@ -267,7 +267,7 @@ export function FocusDeck() {
       </section>
 
       <section className="grid items-start gap-6 xl:grid-cols-[300px_minmax(0,1fr)]">
-        <aside className="rounded-3xl border border-white/10 bg-white/[0.03] p-4 shadow-2xl shadow-black/20 xl:sticky xl:top-24">
+        <aside className="rounded-3xl border border-white/10 bg-white/3 p-4 shadow-2xl shadow-black/20 xl:sticky xl:top-24">
           <div className="mb-4 px-2">
             <p className="font-semibold">Колода задач</p>
             <p className="mt-1 text-xs leading-5 text-white/45">
@@ -309,7 +309,7 @@ export function FocusDeck() {
         </aside>
 
         <div className="space-y-6">
-          <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-2xl shadow-black/20">
+          <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/3 shadow-2xl shadow-black/20">
             <div className="border-b border-white/10 px-5 py-4 sm:px-6">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
@@ -404,7 +404,7 @@ export function FocusDeck() {
           </section>
 
           <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)]">
-            <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 shadow-2xl shadow-black/20">
+            <section className="rounded-3xl border border-white/10 bg-white/3 p-5 shadow-2xl shadow-black/20">
               <div className="mb-4 flex items-center gap-2">
                 <FiFileText className="text-blue-200" size={18} />
 
@@ -429,7 +429,7 @@ export function FocusDeck() {
               </p>
             </section>
 
-            <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-2xl shadow-black/20">
+            <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/3 shadow-2xl shadow-black/20">
               <div className="border-b border-white/10 px-5 py-4">
                 <p className="font-semibold">История по теме</p>
                 <p className="mt-1 text-xs text-white/45">
@@ -507,7 +507,7 @@ function StatCard({
   helper: string;
 }) {
   return (
-    <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+    <article className="rounded-2xl border border-white/10 bg-white/3 p-4">
       <div className="flex items-center gap-2 text-blue-200">
         {icon}
         <p className="text-sm text-white/55">{label}</p>

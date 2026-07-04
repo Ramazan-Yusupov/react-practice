@@ -285,7 +285,7 @@ export function PaletteSniper() {
       </section>
 
       <section className="grid items-start gap-6 lg:grid-cols-[340px_minmax(0,1fr)]">
-        <aside className="space-y-6 rounded-3xl border border-white/10 bg-white/[0.03] p-5 shadow-2xl shadow-black/20 lg:sticky lg:top-24">
+        <aside className="space-y-6 rounded-3xl border border-white/10 bg-white/3 p-5 shadow-2xl shadow-black/20 lg:sticky lg:top-24">
           <div>
             <p className="text-lg font-semibold">Базовый цвет</p>
             <p className="mt-2 text-sm leading-6 text-white/50">
@@ -344,7 +344,7 @@ export function PaletteSniper() {
             <button
               type="button"
               onClick={addToHistory}
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-3 text-sm text-white/80 transition hover:border-white/30 hover:bg-white/[0.08]"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/3 px-4 py-3 text-sm text-white/80 transition hover:border-white/30 hover:bg-white/8"
             >
               <FiPlus size={17} />
               Сохранить в историю
@@ -399,7 +399,7 @@ export function PaletteSniper() {
         </aside>
 
         <div className="space-y-6">
-          <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-2xl shadow-black/20">
+          <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/3 shadow-2xl shadow-black/20">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 px-5 py-4">
               <div>
                 <p className="font-semibold">Сгенерированная палитра</p>
@@ -449,7 +449,7 @@ export function PaletteSniper() {
           </section>
 
           <section className="grid gap-6 xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-            <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-2xl shadow-black/20">
+            <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/3 shadow-2xl shadow-black/20">
               <div className="border-b border-white/10 px-5 py-4">
                 <p className="font-semibold">UI preview</p>
                 <p className="mt-1 text-xs text-white/45">
@@ -524,7 +524,7 @@ export function PaletteSniper() {
                   <p className="mt-1 text-xs text-white/45">Выбери формат для проекта.</p>
                 </div>
 
-                <div className="inline-flex rounded-xl border border-white/10 bg-white/[0.04] p-1">
+                <div className="inline-flex rounded-xl border border-white/10 bg-white/4 p-1">
                   <button
                     type="button"
                     onClick={() => setExportMode('css')}
@@ -561,14 +561,14 @@ export function PaletteSniper() {
                   {copiedKey === 'export' ? 'Скопировано' : 'Копировать'}
                 </button>
 
-                <pre className="max-h-[410px] overflow-auto p-5 pt-16 text-xs leading-6 text-blue-100">
+                <pre className="max-h-102.5 overflow-auto p-5 pt-16 text-xs leading-6 text-blue-100">
                   {exportCode}
                 </pre>
               </div>
             </section>
           </section>
 
-          <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 shadow-2xl shadow-black/20">
+          <section className="rounded-3xl border border-white/10 bg-white/3 p-5 shadow-2xl shadow-black/20">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <p className="font-semibold">История цветов</p>

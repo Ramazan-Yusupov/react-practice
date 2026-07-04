@@ -250,7 +250,7 @@ export function AsyncInbox() {
       </section>
 
       <section className="grid items-start gap-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.35fr)]">
-        <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 shadow-2xl shadow-black/20">
+        <section className="rounded-3xl border border-white/10 bg-white/3 p-5 shadow-2xl shadow-black/20">
           <div className="mb-6 space-y-2">
             <p className="text-lg font-semibold">Новая задача</p>
 
@@ -318,7 +318,7 @@ export function AsyncInbox() {
           </form>
         </section>
 
-        <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-2xl shadow-black/20">
+        <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/3 shadow-2xl shadow-black/20">
           <div className="flex items-center justify-between gap-4 border-b border-white/10 px-5 py-4">
             <div>
               <p className="font-semibold">Очередь</p>
@@ -418,7 +418,7 @@ export function AsyncInbox() {
 
 function StatCard({ label, value, helper }: { label: string; value: number; helper: string }) {
   return (
-    <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+    <article className="rounded-2xl border border-white/10 bg-white/3 p-4">
       <p className="text-sm text-white/50">{label}</p>
       <p className="mt-2 text-3xl font-semibold tracking-tight">{value}</p>
       <p className="mt-1 text-xs text-white/35">{helper}</p>

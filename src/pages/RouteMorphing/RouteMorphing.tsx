@@ -182,13 +182,13 @@ function CaseCatalog({ onOpen }: { onOpen: (caseId: string) => void }) {
             type="button"
             onClick={() => onOpen(caseStudy.id)}
             style={getMorphStyle(caseStudy.id)}
-            className="group overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] text-left shadow-2xl shadow-black/20 transition duration-300 hover:-translate-y-1 hover:border-white/25"
+            className="group overflow-hidden rounded-3xl border border-white/10 bg-white/3 text-left shadow-2xl shadow-black/20 transition duration-300 hover:-translate-y-1 hover:border-white/25"
           >
             <div
               className="relative min-h-52 overflow-hidden p-5"
               style={{ background: caseStudy.gradient }}
             >
-              <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,.22)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.22)_1px,transparent_1px)] [background-size:28px_28px]" />
+              <div className="absolute inset-0 opacity-30 bg-[linear-gradient(rgba(255,255,255,.22)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.22)_1px,transparent_1px)] bg-size-[28px_28px]" />
 
               <div className="relative flex h-full min-h-42 flex-col justify-between">
                 <div className="flex items-center justify-between gap-3">
@@ -274,13 +274,13 @@ function CaseDetails({ caseStudy, onBack }: { caseStudy: CaseStudy; onBack: () =
 
       <section
         style={getMorphStyle(caseStudy.id)}
-        className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-2xl shadow-black/25"
+        className="overflow-hidden rounded-3xl border border-white/10 bg-white/3 shadow-2xl shadow-black/25"
       >
         <div
           className="relative min-h-80 overflow-hidden p-6 sm:p-8"
           style={{ background: caseStudy.gradient }}
         >
-          <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,.22)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.22)_1px,transparent_1px)] [background-size:32px_32px]" />
+          <div className="absolute inset-0 opacity-30 bg-[linear-gradient(rgba(255,255,255,.22)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.22)_1px,transparent_1px)] bg-size-[32px_32px]" />
 
           <div className="relative flex min-h-64 flex-col justify-between">
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -376,7 +376,7 @@ function CaseDetails({ caseStudy, onBack }: { caseStudy: CaseStudy; onBack: () =
 
 function MiniStat({ icon, label, value }: { icon: ReactNode; label: string; value: string }) {
   return (
-    <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+    <article className="rounded-2xl border border-white/10 bg-white/3 p-4">
       <div className="flex items-center gap-2 text-blue-200">{icon}</div>
       <p className="mt-3 text-xs text-white/45">{label}</p>
       <p className="mt-1 text-lg font-semibold text-white">{value}</p>
