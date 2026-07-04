@@ -10,6 +10,8 @@ import { FocusDeck } from './FocusDeck/FocusDeck';
 import { PaletteSniper } from './PaletteSniper/PaletteSniper';
 import { RouteMorphing } from './RouteMorphing/RouteMorphing';
 import { LocalCodeNotebook } from './LocalCodeNotebook/LocalCodeNotebook';
+import { TailwindComponentLab } from './TailwindComponentLab/TailwindComponentLab';
+import { BugReplayLab } from './BugReplayLab/BugReplayLab';
 
 export function App() {
   return (
@@ -25,6 +27,8 @@ export function App() {
         <Route path={PAGES.ROUTE_MORPHING} element={<RouteMorphing />} />
         <Route path={`${PAGES.ROUTE_MORPHING}/:caseId`} element={<RouteMorphing />} />
         <Route path={PAGES.LOCAL_CODE_NOTEBOOK} element={<LocalCodeNotebook />} />
+        <Route path={PAGES.TAILWIND_COMPONENT_LAB} element={<TailwindComponentLab />} />
+        <Route path={PAGES.BUG_REPLAY_LAB} element={<BugReplayLab />} />
       </Routes>
     </Layout>
   );

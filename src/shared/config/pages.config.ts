@@ -8,4 +8,6 @@ export const PAGES = {
   PALETTE_SNIPER: '/palette-sniper',
   ROUTE_MORPHING: '/route-morphing',
   LOCAL_CODE_NOTEBOOK: '/local-code-notebook',
+  TAILWIND_COMPONENT_LAB: '/tailwind-component-lab',
+  BUG_REPLAY_LAB: '/bug-replay-lab',
 };

@@ -1,9 +1,9 @@
 import { RiPassValidFill } from 'react-icons/ri';
 import { PAGES } from '../../shared/config/pages.config';
 import { AiFillHome } from 'react-icons/ai';
-import { FaJs } from 'react-icons/fa6';
+import { FaBug, FaJs } from 'react-icons/fa6';
 import { PiWaveSineBold } from 'react-icons/pi';
-import { FiBookOpen, FiDroplet, FiGitBranch, FiSend, FiTarget } from 'react-icons/fi';
+import { FiBookOpen, FiDroplet, FiGitBranch, FiSend, FiSliders, FiTarget } from 'react-icons/fi';
 
 export interface IMenuBar {
   href: string;
@@ -56,5 +56,15 @@ export const MENU = [
     title: 'Local Code Notebook',
     href: PAGES.LOCAL_CODE_NOTEBOOK,
     icon: <FiBookOpen size={22} />,
+  },
+  {
+    title: 'Tailwind Component Lab',
+    href: PAGES.TAILWIND_COMPONENT_LAB,
+    icon: <FiSliders size={22} />,
+  },
+  {
+    title: 'Bug Replay Lab',
+    href: PAGES.BUG_REPLAY_LAB,
+    icon: <FaBug size={22} />,
   },
 ];
