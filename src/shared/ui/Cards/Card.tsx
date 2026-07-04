@@ -41,7 +41,7 @@ export function Card({
         }}
       >
         {title && <Badge text={title} />}
-        <div className="flex flex-col gap-4 overflow-hidden overflow-y-auto scrollHidden">
+        <div className="flex flex-col gap-4 overflow-hidden overflow-y-auto scrollbar-none">
           {children}
         </div>
       </div>

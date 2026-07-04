@@ -9,6 +9,7 @@ import { AsyncInbox } from './AsyncInbox/AsyncInbox';
 import { FocusDeck } from './FocusDeck/FocusDeck';
 import { PaletteSniper } from './PaletteSniper/PaletteSniper';
 import { RouteMorphing } from './RouteMorphing/RouteMorphing';
+import { LocalCodeNotebook } from './LocalCodeNotebook/LocalCodeNotebook';
 
 export function App() {
   return (
@@ -23,6 +24,7 @@ export function App() {
         <Route path={PAGES.PALETTE_SNIPER} element={<PaletteSniper />} />
         <Route path={PAGES.ROUTE_MORPHING} element={<RouteMorphing />} />
         <Route path={`${PAGES.ROUTE_MORPHING}/:caseId`} element={<RouteMorphing />} />
+        <Route path={PAGES.LOCAL_CODE_NOTEBOOK} element={<LocalCodeNotebook />} />
       </Routes>
     </Layout>
   );

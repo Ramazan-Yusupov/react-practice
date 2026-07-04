@@ -3,7 +3,7 @@ import { PAGES } from '../../shared/config/pages.config';
 import { AiFillHome } from 'react-icons/ai';
 import { FaJs } from 'react-icons/fa6';
 import { PiWaveSineBold } from 'react-icons/pi';
-import { FiDroplet, FiGitBranch, FiSend, FiTarget } from 'react-icons/fi';
+import { FiBookOpen, FiDroplet, FiGitBranch, FiSend, FiTarget } from 'react-icons/fi';
 
 export interface IMenuBar {
   href: string;
@@ -51,5 +51,10 @@ export const MENU = [
     title: 'Route Morphing',
     href: PAGES.ROUTE_MORPHING,
     icon: <FiGitBranch size={22} />,
+  },
+  {
+    title: 'Local Code Notebook',
+    href: PAGES.LOCAL_CODE_NOTEBOOK,
+    icon: <FiBookOpen size={22} />,
   },
 ];

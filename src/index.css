@@ -15,10 +15,6 @@ code {
   @apply text-xs px-2 py-1 rounded-md bg-slate-800;
 }
 
-.scrollHidden::-webkit-scrollbar {
-  display: none;
-}
-
 @utility space-border {
   @apply space-y-4 border-b-4 border-gray-600 pb-4;
 }
@@ -53,11 +49,19 @@ code {
 @supports (animation-timeline: view()) {
   .scroll-choreography-item {
     animation-name: scroll-choreography-reveal;
+    animation-duration: auto;
     animation-timing-function: linear;
     animation-fill-mode: both;
-    animation-timeline: view();
+    animation-timeline: view(block);
     animation-range: entry var(--choreo-start, 10%) cover var(--choreo-end, 85%);
     will-change: opacity, transform;
+  }
+}
+
+@supports not (animation-timeline: view()) {
+  .scroll-choreography-item {
+    opacity: 1;
+    transform: none;
   }
 }
 

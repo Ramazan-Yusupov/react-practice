@@ -7,4 +7,5 @@ export const PAGES = {
   FOCUS_DECK: '/focus-deck',
   PALETTE_SNIPER: '/palette-sniper',
   ROUTE_MORPHING: '/route-morphing',
+  LOCAL_CODE_NOTEBOOK: '/local-code-notebook',
 };
