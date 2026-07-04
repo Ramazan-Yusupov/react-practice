@@ -4,6 +4,11 @@ import { Layout } from '@/Layout';
 import { Gsap } from './Gsap/Gsap';
 import { HookForm } from './HookForm/HookForm';
 import { JsPractice } from './JsPractice/JsPractice';
+import { ScrollChoreography } from './ScrollChoreography/ScrollChoreography';
+import { AsyncInbox } from './AsyncInbox/AsyncInbox';
+import { FocusDeck } from './FocusDeck/FocusDeck';
+import { PaletteSniper } from './PaletteSniper/PaletteSniper';
+import { RouteMorphing } from './RouteMorphing/RouteMorphing';
 
 export function App() {
   return (
@@ -12,6 +17,12 @@ export function App() {
         <Route path={PAGES.GSAP} element={<Gsap />} />
         <Route path={PAGES.HOOK_FORM} element={<HookForm />} />
         <Route path={PAGES.JS_PRACTICE} element={<JsPractice />} />
+        <Route path={PAGES.SCROLL_CHOREOGRAPHY} element={<ScrollChoreography />} />
+        <Route path={PAGES.ASYNC_INBOX} element={<AsyncInbox />} />
+        <Route path={PAGES.FOCUS_DECK} element={<FocusDeck />} />
+        <Route path={PAGES.PALETTE_SNIPER} element={<PaletteSniper />} />
+        <Route path={PAGES.ROUTE_MORPHING} element={<RouteMorphing />} />
+        <Route path={`${PAGES.ROUTE_MORPHING}/:caseId`} element={<RouteMorphing />} />
       </Routes>
     </Layout>
   );

@@ -21,7 +21,7 @@ export function JsPractice() {
   } = usePracticeTask();
 
   return (
-    <section className=" flex justify-between gap-3">
+    <section className="flex justify-between gap-3">
       <div className="space-y-6 max-w-5xl w-full">
         <TaskForm onCreateTask={addTask} />
       </div>

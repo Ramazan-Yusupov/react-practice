@@ -37,3 +37,61 @@ code {
 @utility flex-col-center {
   @apply flex flex-col items-center justify-center;
 }
+
+@keyframes scroll-choreography-reveal {
+  from {
+    opacity: var(--choreo-opacity, 0);
+    transform: translate(var(--choreo-x, 0), var(--choreo-y, 48px)) scale(var(--choreo-scale, 0.94));
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .scroll-choreography-item {
+    animation-name: scroll-choreography-reveal;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: entry var(--choreo-start, 10%) cover var(--choreo-end, 85%);
+    will-change: opacity, transform;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-choreography-item {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-group(*) {
+    animation-duration: 420ms;
+    animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  ::view-transition-old(root) {
+    animation: route-morph-fade-out 160ms ease both;
+  }
+
+  ::view-transition-new(root) {
+    animation: route-morph-fade-in 260ms ease both;
+  }
+}
+
+@keyframes route-morph-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes route-morph-fade-in {
+  from {
+    opacity: 0;
+  }
+}
