@@ -12,7 +12,7 @@ export function Header() {
           </li>
         ))}
         <li>
-          <Avatar src="/frontend.jpg" size="md" />
+          <Avatar src="/frontend.png" size="md" />
         </li>
       </ul>
     </aside>
