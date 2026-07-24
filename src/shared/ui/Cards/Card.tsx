@@ -9,6 +9,7 @@ interface CardProps {
   maxHeight?: string;
   className?: string;
   borderColor?: string;
+  classNameChild?: string;
   children: React.ReactNode;
 }
 
@@ -18,6 +19,7 @@ export function Card({
   maxWidth,
   maxHeight,
   className,
+  classNameChild,
   border = '0px',
   rounded = '16px',
   borderColor = 'currentColor',
@@ -41,7 +43,12 @@ export function Card({
         }}
       >
         {title && <Badge text={title} />}
-        <div className="flex flex-col gap-4 overflow-hidden overflow-y-auto scrollbar-none">
+        <div
+          className={cn(
+            'flex flex-col gap-4 overflow-hidden overflow-y-auto scrollbar-none',
+            classNameChild,
+          )}
+        >
           {children}
         </div>
       </div>
