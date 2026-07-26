@@ -1,3 +1,4 @@
+import { Button } from '@/shared/components/ui/button';
 import { Badge, Card } from '@/shared/ui';
 
 export function Home() {
@@ -44,10 +45,13 @@ export function Home() {
     },
   ];
   return (
-    <Card classNameChild="grid grid-cols-4" border="2px" maxWidth="2xl">
-      {items.map((item) => (
-        <Badge key={item.id} text={item.text} color="white" />
-      ))}
-    </Card>
+    <>
+      <Card classNameChild="grid grid-cols-4" border="2px" maxWidth="2xl">
+        {items.map((item) => (
+          <Badge key={item.id} text={item.text} color="white" />
+        ))}
+        <Button>Open</Button>
+      </Card>
+    </>
   );
 }
