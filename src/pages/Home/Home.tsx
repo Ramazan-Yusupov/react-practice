@@ -1,5 +1,7 @@
 import { Button } from '@/shared/components/ui/button';
+import { ImagesBadge } from '@/shared/components/ui/images-badge';
 import { Badge, Card } from '@/shared/ui';
+import frontend from '/frontend.png';
 
 export function Home() {
   const items = [
@@ -52,6 +54,9 @@ export function Home() {
         ))}
         <Button>Open</Button>
       </Card>
+      <div className="mt-10">
+        <ImagesBadge text="Frontend" images={[frontend]} />
+      </div>
     </>
   );
 }
