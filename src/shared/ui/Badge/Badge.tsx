@@ -21,7 +21,7 @@ export function Badge({ text, count, className, onDelete, color }: BadgeProps) {
     yellow: 'text-yellow-600 border-yellow-600',
   };
   const classNames = `
-                      text-sm font-medium w-fit border-2 rounded-lg px-3 py-1 
+                      text-sm font-medium w-fit border-2 rounded-lg px-3 py-1 h-min 
                       ${colors[color || 'gray']} 
                       ${className || ''}
                     `;
