@@ -7,14 +7,13 @@ export default defineConfig(() => {
   return {
     server: {
       proxy: {
-        '/api': 'http://localhost:3000',
+        '/api': process.env.PATH ?? '',
       },
     },
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
-        '@components': path.resolve(__dirname, './src'),
       },
     },
   };

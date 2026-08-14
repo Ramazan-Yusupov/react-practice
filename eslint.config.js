@@ -25,4 +25,11 @@ export default defineConfig([
       'react-refresh/only-export-components': ['off', { allowConstantExport: true }],
     },
   },
+  {
+    files: ['server/**/*.ts', 'node/**/*.ts'],
+    languageOptions: {
+      ecmaVersion: 2023,
+      globals: globals.node,
+    },
+  },
 ]);
