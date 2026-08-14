@@ -1,18 +1,50 @@
-import { resolve } from 'node:path';
+import { prisma } from '../lib/prisma';
 import type { Tag } from '../types/tag';
-import { readJsonFile, writeJsonFile } from '../utils/json-file';
 
-const TAGS_FILE = resolve(process.cwd(), 'server/data/tags.json');
+type PrismaTag = {
+  id: string;
+  label: string;
+  position: number;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+function toTagDto(tag: PrismaTag): Tag {
+  return {
+    id: tag.id,
+    label: tag.label,
+    position: tag.position,
+    createdAt: tag.createdAt.toISOString(),
+    updatedAt: tag.updatedAt.toISOString(),
+  };
+}
 
 export const tagsRepository = {
   async findAll(): Promise<Tag[]> {
-    const tags = await readJsonFile<Tag[]>(TAGS_FILE, []);
-    return tags.sort((a, b) => a.position - b.position);
+    const tags = await prisma.tag.findMany({ orderBy: { position: 'asc' } });
+    return tags.map(toTagDto);
   },
 
-  async saveAll(tags: Tag[]): Promise<Tag[]> {
-    await writeJsonFile(TAGS_FILE, tags);
-    return tags;
+  async findByLabel(label: string): Promise<Tag | null> {
+    const tags = await prisma.tag.findMany();
+    const found = tags.find((tag) => tag.label.toLowerCase() === label.toLowerCase());
+    return found ? toTagDto(found) : null;
+  },
+
+  async create(label: string, position: number): Promise<Tag> {
+    const tag = await prisma.tag.create({ data: { label, position } });
+    return toTagDto(tag);
+  },
+
+  async delete(id: string): Promise<Tag> {
+    const tag = await prisma.tag.delete({ where: { id } });
+    return toTagDto(tag);
+  },
+
+  async reorder(ids: string[]): Promise<Tag[]> {
+    await prisma.$transaction(
+      ids.map((id, position) => prisma.tag.update({ where: { id }, data: { position } })),
+    );
+    return this.findAll();
   },
 };
-
