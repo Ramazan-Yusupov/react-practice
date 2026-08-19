@@ -7,9 +7,10 @@ datasource db {
 }
 
 model Tag {
-  id        String   @id @default(uuid())
-  label     String   @unique
-  position  Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(uuid())
+  label      String
+  labelLower String   @unique
+  position   Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }

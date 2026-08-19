@@ -26,13 +26,16 @@ export const tagsRepository = {
   },
 
   async findByLabel(label: string): Promise<Tag | null> {
-    const tags = await prisma.tag.findMany();
-    const found = tags.find((tag) => tag.label.toLowerCase() === label.toLowerCase());
-    return found ? toTagDto(found) : null;
+    const tag = await prisma.tag.findUnique({
+      where: { labelLower: label.toLowerCase() },
+    });
+    return tag ? toTagDto(tag) : null;
   },
 
   async create(label: string, position: number): Promise<Tag> {
-    const tag = await prisma.tag.create({ data: { label, position } });
+    const tag = await prisma.tag.create({
+      data: { label, labelLower: label.toLowerCase(), position },
+    });
     return toTagDto(tag);
   },
 

@@ -1,6 +1,7 @@
 import type { CreateTagDto, ReorderTagsDto, Tag } from '../types/tag';
 import { tagsRepository } from '../repositories/tags.repository';
 import { HttpError } from '../utils/http-error';
+import { toHttpError } from '../utils/prisma-error';
 
 function normalizeLabel(label: string) {
   return label.trim().replace(/\s+/g, ' ');
@@ -35,8 +36,8 @@ export const tagsService = {
     try {
       await tagsRepository.delete(id);
       return { id };
-    } catch {
-      throw new HttpError(404, 'Тег не найден', 'TAG_NOT_FOUND');
+    } catch (error) {
+      throw toHttpError(error, 'Не удалось удалить тег');
     }
   },
 
