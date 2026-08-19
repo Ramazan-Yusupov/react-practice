@@ -1,7 +1,8 @@
-import type { CreateTagDto, ReorderTagsDto, Tag } from '../types/tag';
+import type { ReorderTagsDto, Tag } from '../types/tag';
 import { tagsRepository } from '../repositories/tags.repository';
 import { HttpError } from '../utils/http-error';
 import { toHttpError } from '../utils/prisma-error';
+import type { CreateTagInput } from '../schemas/tag.schema';
 
 function normalizeLabel(label: string) {
   return label.trim().replace(/\s+/g, ' ');
@@ -12,16 +13,10 @@ export const tagsService = {
     return tagsRepository.findAll();
   },
 
-  async createTag(dto: CreateTagDto): Promise<Tag> {
+  async createTag(dto: CreateTagInput): Promise<Tag> {
     const label = normalizeLabel(dto.label ?? '');
-
-    if (!label) {
-      throw new HttpError(400, 'Введите название тега', 'EMPTY_TAG_LABEL');
-    }
-
-    if (label.length > 32) {
-      throw new HttpError(400, 'Максимум 32 символа', 'TAG_LABEL_TOO_LONG');
-    }
+    if (!label) throw new HttpError(400, 'Введите название тега', 'EMPTY_TAG_LABEL');
+    if (label.length > 32) throw new HttpError(400, 'Максимум 32 символа', 'TAG_LABEL_TOO_LONG');
 
     const existing = await tagsRepository.findByLabel(label);
     if (existing) {
