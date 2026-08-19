@@ -1,3 +1,4 @@
+import { FaReact } from 'react-icons/fa6';
 import { PAGES } from '../../shared/config/pages.config';
 import { AiFillHome } from 'react-icons/ai';
 
@@ -9,8 +10,13 @@ export interface IMenuBar {
 
 export const MENU = [
   {
-    title: 'Gsap',
+    title: 'Home',
     href: PAGES.HOME,
     icon: <AiFillHome size={22} />,
+  },
+  {
+    title: 'Course React',
+    href: PAGES.COURSE_REACT,
+    icon: <FaReact size={22} />,
   },
 ];

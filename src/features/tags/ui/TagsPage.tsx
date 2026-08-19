@@ -50,16 +50,15 @@ export function TagsPage() {
 
         <div className="flex-between gap-3">
           <Badge text={`Всего: ${tags.length}`} />
+          {error && (
+            <div className="flex-center">
+              <Badge text={error} color="red" />
+            </div>
+          )}
           {tags.length > 0 && (
             <Button title="Clear All" size="sm" variant="danger" onClick={() => void clearTags()} />
           )}
         </div>
-
-        {error && (
-          <div className="flex-center">
-            <Badge text={error} color="red" />
-          </div>
-        )}
 
         <TagFilters
           settings={settings}

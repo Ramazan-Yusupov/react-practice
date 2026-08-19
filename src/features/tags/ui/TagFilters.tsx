@@ -63,7 +63,7 @@ export function TagFilters({
           <input
             type="range"
             min={1}
-            max={12}
+            max={5}
             value={settings.columns}
             onChange={(event) => onColumnsChange(Number(event.target.value))}
             className="h-10 accent-white"

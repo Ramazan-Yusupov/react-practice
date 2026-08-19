@@ -82,7 +82,10 @@ export function TagGrid({
   return (
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <SortableContext items={tags.map((tag) => tag.id)} strategy={rectSortingStrategy}>
-        <div className="grid gap-2" style={gridStyle}>
+        <div
+          className="grid gap-2 max-h-50 pe-2 overflow-y-auto scrollbar-thin scrollbar-gutter-auto scrollbar-thumb-amber-600 scrollbar-track-amber-950/20"
+          style={gridStyle}
+        >
           <AnimatePresence>
             {tags.map((tag) => (
               <SortableTagItem
