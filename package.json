@@ -5,8 +5,6 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "server:dev": "tsx watch server/src/server.ts",
-    "prisma-studio": "npx prisma studio",
     "typecheck": "tsc -b",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
@@ -15,7 +13,6 @@
     "format:check": "prettier . --check",
     "preview": "vite preview",
     "check": "npm run format:check && npm run lint && npm run typecheck && npm run build",
-    "server:start": "tsx server/src/server.ts",
     "dev:full": "concurrently \"npm run dev\" \"npm run server:dev\""
   },
   "dependencies": {
