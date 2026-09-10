@@ -16,11 +16,12 @@ export function Home() {
       {isLoading && <LoadingUI />}
       {isError && <ErrorUI text={error.message} />}
       <Button onClick={() => refetch()} disabled={isLoading} title="Refetch" className="mb-4" />
-      <div className="grid grid-cols-2 max-w-2xl">
+      <div className="grid grid-cols-4 max-w-5xl">
         {data &&
           data.map((user) => (
             <Box
-              size={200}
+              width={250}
+              height={200}
               tabIndex={0}
               role="button"
               onClick={toggleClick}
