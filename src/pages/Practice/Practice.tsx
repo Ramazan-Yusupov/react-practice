@@ -14,7 +14,7 @@ export function Practice() {
     <Card
       border="2px"
       maxWidth="2xl"
-      className="overflow-y-scroll scrollbar-none h-[calc(100vh-200px)]"
+      className="overflow-y-scroll scrollbar-none h-[calc(100vh-400px)]"
     >
       {isPending && <LoadingUI />}
       {isError && <ErrorUI text={error.message} />}

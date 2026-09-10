@@ -10,7 +10,7 @@ export function Home() {
 
   return (
     <div>
-      <Box size={200} background="#ebef67" onClick={handleClick} />
+      <Box size={200} background={isClicked ? '#ebef67' : '#ccc'} onClick={handleClick} />
     </div>
   );
 }
