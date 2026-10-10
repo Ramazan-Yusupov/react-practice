@@ -1,4 +1,4 @@
-import { Avatar } from '../shared/ui';
+import { Show, SignInButton, SignUpButton, UserButton } from '@clerk/react';
 import { MENU } from './ui/menu';
 import { MenuBar } from './ui/MenuBar';
 
@@ -11,8 +11,16 @@ export function Header() {
             <MenuBar menuBar={menuBar} />
           </li>
         ))}
+        <li className="flex items-center">
+          <Show when="signed-in">
+            <UserButton />
+          </Show>
+        </li>
         <li>
-          <Avatar src="/frontend.png" size="md" />
+          <Show when="signed-out">
+            <SignInButton />
+            <SignUpButton />
+          </Show>
         </li>
       </ul>
     </aside>
