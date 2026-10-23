@@ -16,9 +16,11 @@ export function Header() {
             <UserButton />
           </Show>
         </li>
-        <li>
+        <li className="flex items-center gap-5">
           <Show when="signed-out">
             <SignInButton />
+          </Show>
+          <Show when="signed-out">
             <SignUpButton />
           </Show>
         </li>
