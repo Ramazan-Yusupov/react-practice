@@ -1,19 +1,21 @@
-import { Box, Button } from '@/shared/ui';
-import { useState, ViewTransition, startTransition } from 'react';
+import { Badge, Button } from '@/shared/ui';
+import { startTransition, useState, ViewTransition } from 'react';
 
 export function Home() {
-  const [visible, setVisible] = useState(false);
+  const [click, setClick] = useState(false);
 
   return (
-    <>
-      <div className="flex flex-col items-start gap-4">
-        <Button title="Click" onClick={() => startTransition(() => setVisible((prev) => !prev))} />
-        {visible && (
-          <ViewTransition>
-            <Box text="Box" width={250} height={200} background="#f9aac2" />
-          </ViewTransition>
-        )}
-      </div>
-    </>
+    <div className="flex items-center gap-5">
+      <Button onClick={() => startTransition(() => setClick(!click))}>Click me</Button>
+      {click && (
+        <ViewTransition>
+          <Badge
+            text="Frontend"
+            color="yellow"
+            onDelete={() => startTransition(() => setClick(false))}
+          />
+        </ViewTransition>
+      )}
+    </div>
   );
 }
