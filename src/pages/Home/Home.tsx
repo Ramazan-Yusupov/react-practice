@@ -4,16 +4,24 @@ import { startTransition, useState, ViewTransition } from 'react';
 export function Home() {
   const [click, setClick] = useState(false);
 
+  const handleClick = () => {
+    startTransition(() => {
+      setClick(!click);
+    });
+  };
+
+  const handleDelete = () => {
+    startTransition(() => {
+      setClick(false);
+    });
+  };
+
   return (
     <div className="flex items-center gap-5">
-      <Button onClick={() => startTransition(() => setClick(!click))}>Click me</Button>
+      <Button onClick={handleClick}>Click me</Button>
       {click && (
         <ViewTransition>
-          <Badge
-            text="Frontend"
-            color="yellow"
-            onDelete={() => startTransition(() => setClick(false))}
-          />
+          <Badge text="Frontend" color="yellow" onDelete={handleDelete} />
         </ViewTransition>
       )}
     </div>
