@@ -1,8 +1,5 @@
 import type { CSSProperties, ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
-import { CONFIG } from '@/shared/config';
 import { cn } from '@/shared/lib';
-
-const C = CONFIG.box;
 
 type BoxProps<T extends ElementType = 'div'> = {
   as?: T;
@@ -49,7 +46,7 @@ export function Box<T extends ElementType = 'div'>({
   className,
   borderColor,
   background,
-  color = C.defaults.color,
+  color = 'white',
   display,
   position,
   top,
@@ -59,10 +56,10 @@ export function Box<T extends ElementType = 'div'>({
   padding,
   margin,
   style,
-  rounded = C.defaults.rounded,
+  rounded = '16px',
   ...props
 }: BoxProps<T>) {
-  const Component = as || C.defaults.as;
+  const Component = as || 'div';
   const boxStyle: CSSProperties = {
     width: size ?? width,
     height: size ?? height,
@@ -80,13 +77,13 @@ export function Box<T extends ElementType = 'div'>({
     margin,
     border: border ? `${border} solid ${borderColor ?? color}` : undefined,
     borderRadius: rounded,
-    background,
+    background: background,
     color,
     ...style,
   };
 
   return (
-    <Component ref={ref} className={cn(C.base, className)} style={boxStyle} {...props}>
+    <Component ref={ref} className={cn('flex-center', className)} style={boxStyle} {...props}>
       {text || children}
     </Component>
   );
