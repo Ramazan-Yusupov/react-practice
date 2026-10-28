@@ -1,12 +1,16 @@
+import { CONFIG } from '@/shared/config';
+
+const C = CONFIG.error;
+
 interface ErrorProps {
   text?: string;
   isError?: string | boolean;
 }
 
-export function ErrorUI({ isError, text = 'Error' }: ErrorProps) {
+export function ErrorUI({ isError, text = C.defaults.text }: ErrorProps) {
   return isError ? (
-    <div className="flex justify-center">
-      <div className="border-2 border-red-800 p-1 rounded-full text-center w-32 px-4">{text}</div>
+    <div className={C.classes.wrapper}>
+      <div className={C.classes.badge}>{text}</div>
     </div>
   ) : null;
 }

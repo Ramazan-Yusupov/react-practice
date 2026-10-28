@@ -1,8 +1,12 @@
 import { FaTrash } from 'react-icons/fa6';
+import { CONFIG } from '@/shared/config';
+import { cn } from '@/shared/lib';
 import { Button } from '../Buttons/Button';
 import { Badge } from '../Badge/Badge';
 
-type CodeBlockColor = 'white' | 'green' | 'red' | 'yellow';
+const C = CONFIG.codeBlock;
+
+type CodeBlockColor = keyof typeof C.colors;
 type ButtonType = 'button' | 'submit' | 'reset';
 
 interface CodeProps {
@@ -22,18 +26,9 @@ interface CodeProps {
   colorTitle?: CodeBlockColor;
 }
 
-const colorClasses: Record<CodeBlockColor, string> = {
-  red: 'text-red-300',
-  white: 'text-white',
-  green: 'text-green-300',
-  yellow: 'text-yellow-300',
-};
-
-const formatNumber = (value: number) => value.toLocaleString('en-US');
-
 const renderCodeValue = (value?: React.ReactNode) => {
   if (value === null || value === undefined) return null;
-  if (typeof value === 'number') return formatNumber(value);
+  if (typeof value === 'number') return value.toLocaleString(C.locale);
   return value;
 };
 
@@ -45,12 +40,12 @@ export function CodeBlock({
   onEdit,
   onClick,
   onDelete,
-  border = '2px',
-  rounded = '16px',
-  colorL = 'green',
-  colorR = 'green',
-  colorTitle = 'white',
-  borderColor = 'currentColor',
+  border = C.defaults.border,
+  rounded = C.defaults.rounded,
+  colorL = C.defaults.colorL,
+  colorR = C.defaults.colorR,
+  colorTitle = C.defaults.colorTitle,
+  borderColor = C.defaults.borderColor,
 }: CodeProps) {
   const leftValue = renderCodeValue(codeL);
   const rightValue = renderCodeValue(codeR);
@@ -59,11 +54,8 @@ export function CodeBlock({
   return (
     <div
       onClick={onClick}
-      className={`flex-between gap-10 p-3 ${isClickable ? 'cursor-pointer outline-none' : ''}`}
-      style={{
-        border: `${border} solid ${borderColor}`,
-        borderRadius: rounded,
-      }}
+      className={cn(C.classes.root, isClickable && C.classes.clickable)}
+      style={{ border: `${border} solid ${borderColor}`, borderRadius: rounded }}
       role={isClickable ? 'button' : undefined}
       tabIndex={isClickable ? 0 : undefined}
       onKeyDown={
@@ -77,23 +69,23 @@ export function CodeBlock({
           : undefined
       }
     >
-      <div className="flex items-center gap-2">
-        {title && <div className={colorClasses[colorTitle]}>{title}</div>}
+      <div className={C.classes.left}>
+        {title && <div className={C.colors[colorTitle]}>{title}</div>}
         {badge && <Badge text={badge} />}
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className={C.classes.right}>
         {leftValue !== null && (
-          <code className={`${colorClasses[colorL]} flex-center`}>{leftValue}</code>
+          <code className={cn(C.colors[colorL], C.classes.code)}>{leftValue}</code>
         )}
         {rightValue !== null && (
-          <code className={`${colorClasses[colorR]} flex-center`}>{rightValue}</code>
+          <code className={cn(C.colors[colorR], C.classes.code)}>{rightValue}</code>
         )}
 
         {onDelete && (
           <Button
-            onClick={(event) => {
-              event.stopPropagation();
+            onClick={(e) => {
+              e.stopPropagation();
               onDelete();
             }}
             size="md"
@@ -104,13 +96,13 @@ export function CodeBlock({
 
         {onEdit && (
           <Button
-            onClick={(event) => {
-              event.stopPropagation();
+            onClick={(e) => {
+              e.stopPropagation();
               onEdit();
             }}
             size="sm"
             variant="secondary"
-            title="Edit"
+            title={C.editTitle}
           />
         )}
       </div>
