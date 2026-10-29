@@ -9,7 +9,7 @@ export default defineConfig(() => {
   return {
     server: {
       proxy: {
-        '/api': process.env.PATH ?? '',
+        '/api': 'http://localhost:4000',
       },
     },
     plugins: [react(), tailwindcss()],

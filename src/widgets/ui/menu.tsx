@@ -1,5 +1,5 @@
-import { PAGES } from '../../shared/config/pages.config';
-import { AiFillHome } from 'react-icons/ai';
+import { AiFillHome, AiOutlineUser } from 'react-icons/ai';
+import { PAGES } from '@/shared/config';
 
 export interface IMenuBar {
   href: string;
@@ -7,10 +7,7 @@ export interface IMenuBar {
   icon: React.ReactNode;
 }
 
-export const MENU = [
-  {
-    title: 'Home',
-    href: PAGES.HOME,
-    icon: <AiFillHome size={22} />,
-  },
+export const MENU: IMenuBar[] = [
+  { title: 'Home', href: PAGES.HOME, icon: <AiFillHome size={22} /> },
+  { title: 'Profile', href: PAGES.PROFILE, icon: <AiOutlineUser size={22} /> },
 ];
