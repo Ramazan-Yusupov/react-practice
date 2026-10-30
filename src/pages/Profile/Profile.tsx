@@ -1,19 +1,15 @@
-import { useAuth } from '@clerk/react';
 import { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ProfileCard } from '@/entities/profile/ProfileCard';
 import { useMyProfile } from '@/entities/profile/useProfile';
 import { EditProfileForm } from '@/features/edit-profile/EditProfileForm';
-import { PAGES, profilePath } from '@/shared/config';
+import { profilePath } from '@/shared/config';
 import { Button, ErrorUI, LoadingUI } from '@/shared/ui';
 
 export function Profile() {
-  const { isLoaded, isSignedIn } = useAuth();
   const { data: profile, isPending, isError, error } = useMyProfile();
   const [isEditing, setIsEditing] = useState(false);
 
-  if (!isLoaded) return <LoadingUI isLoading />;
-  if (!isSignedIn) return <Navigate to={PAGES.HOME} replace />;
   if (isPending) return <LoadingUI isLoading />;
   if (isError) return <ErrorUI isError text={error.message} />;
 

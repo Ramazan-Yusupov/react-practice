@@ -1,14 +1,27 @@
 import { clerkMiddleware } from '@clerk/express';
 import cors from 'cors';
 import express, { type ErrorRequestHandler } from 'express';
+import helmet from 'helmet';
 import { env } from './env.ts';
 import { HttpError } from './errors.ts';
 import { profileRouter } from './routes/profile.routes.ts';
+import { apiLimiter } from './security.ts';
 
 const app = express();
 
-app.use(cors({ origin: env.CLIENT_URL }));
+// Заголовки безопасности (HSTS, nosniff, frame-ancestors и др.), убирает X-Powered-By
+app.use(helmet());
+app.use(
+  cors({
+    origin: env.CLIENT_URL,
+    methods: ['GET', 'PATCH'],
+    allowedHeaders: ['Authorization', 'Content-Type'],
+    maxAge: 600,
+  }),
+);
 app.use(express.json({ limit: '10kb' }));
+// Лимит запросов до проверки токена Clerk
+app.use('/api', apiLimiter);
 // Проверяет токен из заголовка Authorization: Bearer ...
 // authorizedParties: токен принимается только со страницы нашего фронтенда
 app.use(clerkMiddleware({ authorizedParties: [env.CLIENT_URL] }));
