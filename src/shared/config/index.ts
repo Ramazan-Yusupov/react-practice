@@ -1,2 +1,2 @@
-export { PAGES, profilePath } from './pages.config';
+export { PAGES } from './pages.config';
 export { queryClient } from './queryClient';
