@@ -7,11 +7,12 @@ type BadgeProps = {
   text?: string | number;
   count?: number;
   color?: colors;
+  size?: 'sm' | 'md' | 'lg';
   className?: string;
   onDelete?: () => void;
 };
 
-export function Badge({ text, count, className, onDelete, color }: BadgeProps) {
+export function Badge({ text, count, className, onDelete, color, size }: BadgeProps) {
   const colors = {
     white: 'text-white border-white',
     red: 'text-red-600 border-red-600',
@@ -20,9 +21,15 @@ export function Badge({ text, count, className, onDelete, color }: BadgeProps) {
     green: 'text-green-600 border-green-600',
     yellow: 'text-yellow-600 border-yellow-600',
   };
+  const sizes = {
+    sm: 'text-xs',
+    md: 'text-sm',
+    lg: 'text-lg',
+  };
   const classNames = `
                       text-sm font-medium w-fit border-2 rounded-lg px-3 py-1 h-min 
                       ${colors[color || 'gray']} 
+                      ${sizes[size || 'md']} 
                       ${className || ''}
                     `;
 

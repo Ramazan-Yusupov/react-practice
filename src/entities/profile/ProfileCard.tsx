@@ -14,7 +14,7 @@ export function ProfileCard({ profile, actions }: ProfileCardProps) {
   });
 
   return (
-    <Card border="2px" maxWidth="5xl">
+    <Card border="2px" maxWidth="3xl">
       <div className="h-32" style={{ backgroundColor: profile.bannerColor }} />
 
       <div className="px-5 pb-5">

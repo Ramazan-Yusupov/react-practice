@@ -79,7 +79,7 @@ export function CodeBlock({
     >
       <div className="flex items-center gap-2">
         {title && <div className={colorClasses[colorTitle]}>{title}</div>}
-        {badge && <Badge text={badge} />}
+        {badge && <Badge size="sm" text={badge} />}
       </div>
 
       <div className="flex items-center gap-3">
