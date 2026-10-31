@@ -5,7 +5,7 @@ type TextAlign = 'start' | 'center' | 'end';
 
 interface TypographyProps {
   as?: TypographyTag;
-  text: string;
+  text: string | number;
   className?: string;
   align?: TextAlign;
 }
