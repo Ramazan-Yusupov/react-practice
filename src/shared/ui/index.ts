@@ -3,6 +3,7 @@ export { Avatar } from './Avatar/Avatar';
 export { Box } from './Box/Box';
 export { Image } from './Image/Image';
 export { Badge } from './Badge/Badge';
+export { Typography } from './Typography/Typography';
 
 /* Input Components */
 export { Form } from './Inputs/Form';
